@@ -13,14 +13,14 @@ export const asyncRouterMap = [
       {
         path: '/dashboard/ybp',
         name: 'ybp',
-       // redirect: '/dashboard/workplace',
-        component:()=> import('@/views/dashboard/Workplace'),
-        meta: { title: '仪表盘', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] },
+        // redirect: '/dashboard/workplace',
+        component: () => import('@/views/dashboard/Workplace'),
+        meta: { title: '仪表盘', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] }
       },
       {
         path: '/dashboard',
         name: 'dashboard',
-       // redirect: '/dashboard/workplace',
+        // redirect: '/dashboard/workplace',
         component: RouteView,
         meta: { title: '工作台', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] },
         children: [

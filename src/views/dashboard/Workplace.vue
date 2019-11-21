@@ -18,7 +18,13 @@
         </a-card>
       </a-col>
 
-      <a-col style="padding: 0 12px" :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
+      <a-col
+        style="padding: 0 12px"
+        :xl="8"
+        :lg="24"
+        :md="24"
+        :sm="24"
+        :xs="24">
         <a-card
           title="数据维护"
           style="margin-bottom: 24px"
@@ -56,7 +62,7 @@
 export default {
   name: 'Workplace',
   components: {},
-  data() {
+  data () {
     return {
       tableData: [
         { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
@@ -72,8 +78,8 @@ export default {
       ]
     }
   },
-  created() {},
-  mounted() {},
+  created () {},
+  mounted () {},
   methods: {}
 }
 </script>

@@ -5,7 +5,7 @@
         <div class="header">
           <a href="/">
             <img src="~@/assets/logo.svg" class="logo" alt="logo">
-            <span class="title">admin</span>
+            <span class="title">Ant Design</span>
           </a>
         </div>
         <div class="desc">

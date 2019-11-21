@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       tableData: [{ index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' }]
     }
