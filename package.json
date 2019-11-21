@@ -30,9 +30,11 @@
     "vue-ls": "^3.2.1",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.1.2",
+    "vue-svg-component-runtime": "^1.0.1",
     "vuex": "^3.1.1",
+    "vxe-table": "^2.6.22",
     "wangeditor": "^3.1.1",
-    "vue-svg-component-runtime": "^1.0.1"
+    "xe-utils": "^2.2.12"
   },
   "devDependencies": {
     "@ant-design/colors": "^3.2.1",
@@ -47,11 +49,11 @@
     "babel-plugin-transform-remove-console": "^6.9.4",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
-    "vue-template-compiler": "^2.6.10",
-    "vue-svg-icon-loader": "^2.1.1",
-    "webpack-theme-color-replacer": "^1.2.17",
     "opencollective": "^1.0.3",
-    "opencollective-postinstall": "^2.0.2"
+    "opencollective-postinstall": "^2.0.2",
+    "vue-svg-icon-loader": "^2.1.1",
+    "vue-template-compiler": "^2.6.10",
+    "webpack-theme-color-replacer": "^1.2.17"
   },
   "collective": {
     "type": "opencollective",

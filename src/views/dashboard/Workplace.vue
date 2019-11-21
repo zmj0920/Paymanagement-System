@@ -2,20 +2,18 @@
   <div>
     <a-row :gutter="24">
       <a-col :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
-        <a-card
-          class="project-list"
-          :loading="loading"
-          style="margin-bottom: 24px;"
-          :bordered="false"
-          title="登录日志"
-          :body-style="{ padding: 0 }"
-        >
+        <a-card title="登录日志" class="project-list" style="margin-bottom: 24px;" :bordered="false">
           <a slot="extra">全部日志</a>
-          <div>登录日志</div>
+          <vxe-table highlight-hover-row border height="300" :data="tableData">
+            <vxe-table-column type="index" title="序号" width="60"></vxe-table-column>
+            <vxe-table-column field="name" title="姓名"></vxe-table-column>
+            <vxe-table-column field="sex" title="性别"></vxe-table-column>
+            <vxe-table-column field="age" title="年龄"></vxe-table-column>
+            <vxe-table-column field="address" title="地址" show-overflow></vxe-table-column>
+          </vxe-table>
         </a-card>
-
-        <a-card :loading="loading" title="操作记录" :bordered="false">
-            <a slot="extra">全部记录</a>
+        <a-card style="margin-bottom: 24px" title="操作记录" :bordered="false">
+          <a slot="extra">全部记录</a>
           <div>操作记录</div>
         </a-card>
       </a-col>
@@ -23,7 +21,6 @@
       <a-col style="padding: 0 12px" :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
         <a-card
           title="数据维护"
-          :loading="loading"
           style="margin-bottom: 24px"
           :bordered="false"
           :body-style="{padding: 0}"
@@ -32,7 +29,6 @@
         </a-card>
         <a-card
           title="站点设置"
-          :loading="loading"
           style="margin-bottom: 24px"
           :bordered="false"
           :body-style="{padding: 0}"
@@ -43,7 +39,6 @@
       <a-col :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
         <a-card
           class="project-list"
-          :loading="loading"
           style="margin-bottom: 24px;"
           :bordered="false"
           title="接口白名单"
@@ -58,59 +53,28 @@
 </template>
 
 <script>
-//import { timeFix } from '@/utils/util'
-//import { mapState } from 'vuex'
-
-//import { PageView } from '@/layouts'
-//import HeadInfo from '@/components/tools/HeadInfo'
-//import { Radar } from '@/components'
-
-//import { getRoleList, getServiceList } from '@/api/manage'
-
-//const DataSet = require('@antv/data-set')
-
 export default {
   name: 'Workplace',
   components: {},
   data() {
     return {
-      loading: true
+      tableData: [
+        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
+        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
+        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
+        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
+        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
+        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
+        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
+        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
+        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
+        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' }
+      ]
     }
   },
-  created() {
-    //this.user = this.userInfo
-    //this.avatar = this.userInfo.avatar
-    getRoleList().then(res => {
-      // console.log('workplace -> call getRoleList()', res)
-    })
-    getServiceList().then(res => {
-      // console.log('workplace -> call getServiceList()', res)
-    })
-  },
-  mounted() {
-    // this.getProjects()
-    // this.getActivity()
-    // this.getTeams()
-    // this.initRadar()
-  },
-  methods: {
-    getProjects() {
-      this.$http.get('/list/search/projects').then(res => {
-        // this.projects = res.result && res.result.data
-        // this.loading = false
-      })
-    },
-    getActivity() {
-      this.$http.get('/workplace/activity').then(res => {
-        //  this.activities = res.result
-      })
-    },
-    getTeams() {
-      this.$http.get('/workplace/teams').then(res => {
-        //  this.teams = res.result
-      })
-    }
-  }
+  created() {},
+  mounted() {},
+  methods: {}
 }
 </script>
 
