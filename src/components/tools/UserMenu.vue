@@ -102,7 +102,9 @@
 <script>
 import NoticeIcon from '@/components/NoticeIcon'
 import { mapActions, mapGetters } from 'vuex'
-import { axios } from '@/utils/request'
+// import { axios } from '@/utils/request'
+
+import axios from 'axios'
 export default {
   name: 'UserMenu',
   components: {
@@ -144,21 +146,18 @@ export default {
           //   this.confirmLoading = false
           // }, 2000)
           // eslint-disable-next-line no-console
-          axios({
-            url: 'http://47.56.180.125/auth/local/register',
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data: { username: values.username, password: values.password, email: values.email }
-          }).then(res => {
-            console.log(res)
-          })
-
-          // axios.post('/auth/local/register', { username: values.username, password: values.password, email: values.email }).then(res => {
+          // axios({
+          //   url: 'http://47.56.180.125/auth/local/register',
+          //   method: 'post',
+          //   data: { username: values.username, password: values.password, email: values.email }
+          // }).then(res => {
           //   console.log(res)
-          //   this.visible = false
           // })
+
+          axios.post('http://47.56.180.125/auth/local/register', { username: values.username, password: values.password, email: values.email }).then(res => {
+            console.log(res)
+            this.visible = false
+          })
           console.log('Received values of form: ', values.username)
         }
       })
