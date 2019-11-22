@@ -24,13 +24,13 @@ const constantRouterComponents = {
   'AdvanceForm': () => import('@/views/form/advancedForm/AdvancedForm'),
 
   // list
-  'TableList': () => import('@/views/list/TableList'),
-  'StandardList': () => import('@/views/list/StandardList'),
-  'CardList': () => import('@/views/list/CardList'),
-  'SearchLayout': () => import('@/views/list/search/SearchLayout'),
-  'SearchArticles': () => import('@/views/list/search/Article'),
-  'SearchProjects': () => import('@/views/list/search/Projects'),
-  'SearchApplications': () => import('@/views/list/search/Applications'),
+  // 'TableList': () => import('@/views/list/TableList'),
+  // 'StandardList': () => import('@/views/list/StandardList'),
+  //  'CardList': () => import('@/views/list/CardList'),
+  // 'SearchLayout': () => import('@/views/list/search/SearchLayout'),
+  // 'SearchArticles': () => import('@/views/list/search/Article'),
+  // 'SearchProjects': () => import('@/views/list/search/Projects'),
+  // 'SearchApplications': () => import('@/views/list/search/Applications'),
   'ProfileBasic': () => import('@/views/profile/basic/Index'),
   'ProfileAdvanced': () => import('@/views/profile/advanced/Advanced'),
 

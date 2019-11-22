@@ -37,6 +37,23 @@ const user = {
     Login ({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
+          // response = {
+          //   avatar: 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png',
+          //   createTime: 1497160610259,
+          //   creatorId: 'admin',
+          //   deleted: 0,
+          //   id: 'Dc2Feae6-9bA5-ADb1-40db-344F62C7e6BE',
+          //   lang: 'zh-CN',
+          //   lastLoginIp: '27.154.74.117',
+          //   lastLoginTime: 1534837621348,
+          //   name: 'Patricia Moore',
+          //   password: '',
+          //   roleId: 'admin',
+          //   status: 1,
+          //   telephone: '',
+          //   token: '4291d7da9005377ec9aec4a71ea837f',
+          //   username: 'admin'
+          // }
           const result = response.result
           Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
           commit('SET_TOKEN', result.token)

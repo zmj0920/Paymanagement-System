@@ -66,12 +66,15 @@
             <a-spin :spinning="teamSpinning">
               <div class="members">
                 <a-row>
-                  <a-col :span="12" v-for="(item, index) in teams" :key="index">
+               <div>
+                  团队
+               </div>
+                  <!-- <a-col :span="12" v-for="(item, index) in teams" :key="index">
                     <a>
                       <a-avatar size="small" :src="item.avatar"/>
                       <span class="member">{{ item.name }}</span>
                     </a>
-                  </a-col>
+                  </a-col> -->
                 </a-row>
               </div>
             </a-spin>
@@ -116,7 +119,6 @@ export default {
       tagInputVisible: false,
       tagInputValue: '',
 
-      teams: [],
       teamSpinning: true,
 
       tabListNoTitle: [
@@ -143,10 +145,10 @@ export default {
     ...mapGetters(['nickname', 'avatar']),
 
     getTeams () {
-      this.$http.get('/workplace/teams').then(res => {
-        this.teams = res.result
-        this.teamSpinning = false
-      })
+      // this.$http.get('/workplace/teams').then(res => {
+      //   this.teams = res.result
+      //   this.teamSpinning = false
+      // })
     },
 
     handleTabChange (key, type) {
