@@ -22,7 +22,7 @@ export const asyncRouterMap = [
         name: 'tdgl',
         redirect: '/tdgl/workplace',
         component: RouteView,
-        meta: { title: '通道管理', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] },
+        meta: { title: '通道管理', keepAlive: true, icon: 'wallet', permission: ['dashboard'] },
         children: [
           {
             path: '/dashboard/qd_channel',
@@ -55,7 +55,7 @@ export const asyncRouterMap = [
         name: 'jygl',
         redirect: '/tdgl/workplace',
         component: RouteView,
-        meta: { title: '交易管理', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] },
+        meta: { title: '交易管理', keepAlive: true, icon: 'pay-circle', permission: ['dashboard'] },
         children: [
           {
             path: '/dashboard/zf_query',
@@ -82,7 +82,7 @@ export const asyncRouterMap = [
         name: 'yhgl',
         redirect: '/yhgl/workplace',
         component: RouteView,
-        meta: { title: '用户管理', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] },
+        meta: { title: '用户管理', keepAlive: true, icon: 'team', permission: ['dashboard'] },
         children: [
           {
             path: '/dashboard/yh_user',
@@ -109,7 +109,7 @@ export const asyncRouterMap = [
         name: 'yygj',
         redirect: '/yygj/workplace',
         component: RouteView,
-        meta: { title: '运营工具', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] },
+        meta: { title: '运营工具', keepAlive: true, icon: 'solution', permission: ['dashboard'] },
         children: [
           {
             path: '/dashboard/jk_test',
@@ -136,7 +136,7 @@ export const asyncRouterMap = [
         name: 'xtgj',
         redirect: '/xtgj/workplace',
         component: RouteView,
-        meta: { title: '系统工具', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] },
+        meta: { title: '系统工具', keepAlive: true, icon: 'setting', permission: ['dashboard'] },
         children: [
           {
             path: '/dashboard/data_maintenance',
