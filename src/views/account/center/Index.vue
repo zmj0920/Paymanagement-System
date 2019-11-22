@@ -5,9 +5,9 @@
         <a-card :bordered="false">
           <div class="account-center-avatarHolder">
             <div class="avatar">
-              <img :src="avatar()">
+              <img src="https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png">
             </div>
-            <div class="username">{{ nickname() }}</div>
+            <div class="username">君吟</div>
             <div class="bio">海纳百川，有容乃大</div>
           </div>
           <div class="account-center-detail">
