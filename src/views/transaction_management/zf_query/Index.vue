@@ -1,6 +1,6 @@
 <template>
   <div>
-支付查询
+    支付查询
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-接口ip白名单
+    接口ip白名单
   </div>
 </template>
 

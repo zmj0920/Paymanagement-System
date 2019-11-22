@@ -90,10 +90,6 @@
             <a-button htmlType="submit" type="primary">提交</a-button>
           </a-form-item>
         </a-form>
-
-        <template slot="footer">
-
-        </template>
       </a-modal>
     </div>
   </div>
@@ -102,9 +98,8 @@
 <script>
 import NoticeIcon from '@/components/NoticeIcon'
 import { mapActions, mapGetters } from 'vuex'
-// import { axios } from '@/utils/request'
-
 import axios from 'axios'
+
 export default {
   name: 'UserMenu',
   components: {
@@ -139,22 +134,7 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          // this.ModalText = 'The modal will be closed after two seconds'
-          // this.confirmLoading = true
-          // setTimeout(() => {
-          //   this.visible = false
-          //   this.confirmLoading = false
-          // }, 2000)
-          // eslint-disable-next-line no-console
-          // axios({
-          //   url: 'http://47.56.180.125/auth/local/register',
-          //   method: 'post',
-          //   data: { username: values.username, password: values.password, email: values.email }
-          // }).then(res => {
-          //   console.log(res)
-          // })
-
-          axios.post('http://47.56.180.125/auth/local/register', { username: values.username, password: values.password, email: values.email }).then(res => {
+          axios.post(`${this.$url}/auth/local/register`, { username: values.username, password: values.password, email: values.email }).then(res => {
             console.log(res)
             this.visible = false
           })

@@ -1,6 +1,6 @@
 <template>
   <div>
-      数据维护
+    数据维护
   </div>
 </template>
 

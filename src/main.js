@@ -1,7 +1,5 @@
-// with polyfills
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
-
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -24,7 +22,7 @@ import './components/global.less'
 Vue.use(VXETable)
 
 Vue.config.productionTip = false
-
+Vue.prototype.$url = 'http://47.56.180.125'
 // mount axios Vue.$http and this.$http
 Vue.use(VueAxios)
 

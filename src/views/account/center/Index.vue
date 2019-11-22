@@ -66,9 +66,9 @@
             <a-spin :spinning="teamSpinning">
               <div class="members">
                 <a-row>
-               <div>
-                  团队
-               </div>
+                  <div>
+                    团队
+                  </div>
                   <!-- <a-col :span="12" v-for="(item, index) in teams" :key="index">
                     <a>
                       <a-avatar size="small" :src="item.avatar"/>

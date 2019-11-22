@@ -1,6 +1,6 @@
 <template>
   <div>
-      代付订单
+    代付订单
   </div>
 </template>
 

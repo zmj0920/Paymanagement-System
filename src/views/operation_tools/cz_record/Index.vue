@@ -1,6 +1,6 @@
 <template>
   <div>
-      操作记录
+    操作记录
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-   通道
+    通道
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
- 风控规则
+    风控规则
   </div>
 </template>
 

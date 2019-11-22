@@ -1,6 +1,6 @@
 <template>
   <div>
-  通道组
+    通道组
   </div>
 </template>
 

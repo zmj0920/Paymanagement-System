@@ -1,6 +1,6 @@
 <template>
   <div>
-  商户号
+    商户号
   </div>
 </template>
 

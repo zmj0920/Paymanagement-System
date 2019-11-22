@@ -1,6 +1,6 @@
 <template>
   <div>
-  站点设置
+    站点设置
   </div>
 </template>
 

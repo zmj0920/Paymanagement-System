@@ -1,6 +1,6 @@
 <template>
   <div>
-      渠道
+    渠道
   </div>
 </template>
 

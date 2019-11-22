@@ -72,7 +72,7 @@
       </a-tabs>
 
       <a-form-item>
-        <a-checkbox v-decorator="['rememberMe']">自动登录</a-checkbox>
+        <!-- <a-checkbox v-decorator="['rememberMe']">自动登录</a-checkbox> -->
         <router-link
           :to="{ name: 'recover', params: { user: 'aaa'} }"
           class="forge-password"
@@ -102,7 +102,7 @@
         <a>
           <a-icon class="item-icon" type="weibo-circle"></a-icon>
         </a>
-        <router-link class="register" :to="{ name: 'register' }">注册账户</router-link>
+        <!-- <router-link class="register" :to="{ name: 'register' }">注册账户</router-link> -->
       </div>
     </a-form>
 
