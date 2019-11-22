@@ -46,8 +46,8 @@
             </a-form-item>
           </a-col>
 
-          <a-col :md="!advanced && 8 || 24" :sm="24">
-            <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
+          <a-col :sm="24">
+            <span class="table-page-search-submitButtons">
               <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
               <a-button style="margin-left: 8px" @click="() => queryParam = {}">新增聚道</a-button>
             </span>
@@ -77,6 +77,15 @@
         </span>
       </a-table>
     </template>
+
+    <a-modal
+      title="操作"
+      :width="800"
+      v-model="visible"
+      @ok="handleOk"
+    >
+      <p>支付通道</p>
+    </a-modal>
   </a-card>
 </template>
 
@@ -139,6 +148,11 @@ export default {
     return {
       data,
       columns
+    }
+  },
+  methods: {
+    handleOk () {
+
     }
   }
 }

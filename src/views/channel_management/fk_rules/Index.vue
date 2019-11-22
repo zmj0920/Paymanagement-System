@@ -8,10 +8,9 @@
               <a-input placeholder="ID名称" />
             </a-form-item>
           </a-col>
-          <a-col :md="!advanced && 8 || 24" :sm="24">
+          <a-col :sm="24">
             <span
               class="table-page-search-submitButtons"
-              :style="advanced && { float: 'right', overflow: 'hidden' } || {} "
             >
               <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
               <a-button style="margin-left: 8px" @click="() => queryParam = {}">新增</a-button>
@@ -22,7 +21,7 @@
     </div>
     <a-table bordered :columns="columns4" :dataSource="dataSource" :pagination="true">
       <template slot="operation" slot-scope="text, record">
-        <a-button size="small" type="primary" @click="handleDelete(record)" class="btn">编辑</a-button>
+        <a-button size="small" type="primary" @click="handleEdit(record)" class="btn">编辑</a-button>
         <a-button size="small" type="primary" @click="handleDelete(record)" class="btn">新增通道</a-button>
         <a-button size="small" type="primary" @click="handleDelete(record)" class="btn">删除</a-button>
       </template>
@@ -34,13 +33,56 @@
         <a-badge status="warning" text="警告" v-else />
       </template>
     </a-table>
+    <a-modal
+      title="操作"
+      :width="800"
+      v-model="visible"
+      @ok="handleOk"
+    >
+      <a-form :autoFormCreate="(form)=>{this.form = form}">
+
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="唯一识别码"
+          hasFeedback
+          validateStatus="success"
+        >
+          <a-input placeholder="唯一识别码" v-model="mdl.id" id="no" />
+        </a-form-item>
+
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="角色名称"
+          hasFeedback
+          validateStatus="success"
+        >
+          <a-input placeholder="起一个名字" v-model="mdl.username" id="role_name" />
+        </a-form-item>
+
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          label="状态"
+          hasFeedback
+          validateStatus="warning"
+        >
+          <a-select v-model="mdl.status">
+            <a-select-option value="1">正常</a-select-option>
+            <a-select-option value="2">禁用</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-divider />
+      </a-form>
+    </a-modal>
   </div>
 </template>
 <script>
 import { Modal, message } from 'ant-design-vue'
 import dataSource from './data'
 export default {
-  name: 'HighTable',
+  name: '',
   components: {
     'a-modal': Modal
   },
@@ -54,7 +96,9 @@ export default {
       },
       params: {
         page: 1
-      }
+      },
+      mdl: {},
+      visible: false
     }
   },
   computed: {},
@@ -68,6 +112,14 @@ export default {
           this.request()
         }
       })
+    },
+    handleOk () {
+
+    },
+    handleEdit (record) {
+      this.mdl = Object.assign({}, record)
+      console.log(this.mdl)
+      this.visible = true
     }
   },
   mounted () {}
