@@ -145,7 +145,7 @@ export default {
           // }, 2000)
           // eslint-disable-next-line no-console
           axios({
-            url: '/auth/local/register',
+            url: 'http://47.56.180.125/auth/local/register',
             method: 'post',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'

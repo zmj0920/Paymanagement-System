@@ -1,13 +1,11 @@
 import Vue from 'vue'
-import { login, getInfo, logout, register } from '@/api/login'
+import { login, getInfo, logout } from '@/api/login'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
-import { welcome } from '@/utils/util'
 
 const user = {
   state: {
     token: '',
     name: '',
-    welcome: '',
     avatar: '',
     roles: [],
     info: {}
@@ -17,9 +15,8 @@ const user = {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_NAME: (state, { name, welcome }) => {
+    SET_NAME: (state, { name }) => {
       state.name = name
-      state.welcome = welcome
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
@@ -63,18 +60,6 @@ const user = {
         })
       })
     },
-
-    Register ({ commit }, userInfo) {
-      return new Promise((resolve, reject) => {
-        register(userInfo).then(response => {
-          console.log(response.result)
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },
-
     // 获取用户信息
     GetInfo ({ commit }) {
       return new Promise((resolve, reject) => {
@@ -97,7 +82,7 @@ const user = {
             reject(new Error('getInfo: roles must be a non-null array !'))
           }
 
-          commit('SET_NAME', { name: result.name, welcome: welcome() })
+          commit('SET_NAME', { name: result.name })
           commit('SET_AVATAR', result.avatar)
 
           resolve(response)

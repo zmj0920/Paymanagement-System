@@ -20,14 +20,6 @@ export function login (parameter) {
   })
 }
 
-export function register (parameter) {
-  return axios({
-    url: '/auth/local/register',
-    method: 'post',
-    data: parameter
-  })
-}
-
 export function getSmsCaptcha (parameter) {
   return axios({
     url: api.SendSms,
@@ -46,13 +38,6 @@ export function getInfo () {
   })
 }
 
-export function getCurrentUserNav (token) {
-  return axios({
-    url: '/user/nav',
-    method: 'get'
-  })
-}
-
 export function logout () {
   return axios({
     url: '/auth/logout',
@@ -60,17 +45,5 @@ export function logout () {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
     }
-  })
-}
-
-/**
- * get user 2step code open?
- * @param parameter {*}
- */
-export function get2step (parameter) {
-  return axios({
-    url: api.twoStepCode,
-    method: 'post',
-    data: parameter
   })
 }
