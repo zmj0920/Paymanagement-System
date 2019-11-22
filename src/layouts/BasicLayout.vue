@@ -70,7 +70,7 @@ import SideMenu from '@/components/Menu/SideMenu'
 import GlobalHeader from '@/components/GlobalHeader'
 import GlobalFooter from '@/components/GlobalFooter'
 import SettingDrawer from '@/components/SettingDrawer'
-
+import { asyncRouterMap } from '@/config/router.config.js'
 export default {
   name: 'BasicLayout',
   mixins: [mixin, mixinDevice],
@@ -109,7 +109,7 @@ export default {
     }
   },
   created () {
-    this.menus = this.mainMenu.find(item => item.path === '/').children
+    this.menus = asyncRouterMap.find((item) => item.path === '/').children
     this.collapsed = !this.sidebarOpened
   },
   mounted () {
