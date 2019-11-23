@@ -98,6 +98,7 @@
 <script>
 import NoticeIcon from '@/components/NoticeIcon'
 import { mapActions, mapGetters } from 'vuex'
+import servicePath from '@/api'
 import axios from 'axios'
 
 export default {
@@ -134,7 +135,7 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          axios.post(`${this.$url}/auth/local/register`, { username: values.username, password: values.password, email: values.email }).then(res => {
+          axios.post(servicePath.userRegister, { username: values.username, password: values.password, email: values.email }).then(res => {
             console.log(res)
             this.visible = false
           })

@@ -1,12 +1,7 @@
-const api = {
-  Login: '/auth/login',
-  Logout: '/auth/logout',
-  ForgePassword: '/auth/forge-password',
-  // Register: '/auth/register',
-  //  twoStepCode: '/auth/2step-code',
-  SendSms: '/account/sms',
-  SendSmsErr: '/account/sms_err',
-  // get my info
-  UserInfo: '/user/info'
+const ipUrl = 'http://47.56.180.125'
+
+const servicePath = {
+  userLogin: ipUrl + '/auth/local', //  登录接口
+  userRegister: ipUrl + '/auth/local/register' // 注册用户
 }
-export default api
+export default servicePath

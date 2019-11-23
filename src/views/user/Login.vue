@@ -120,7 +120,7 @@
 import TwoStepCaptcha from '@/components/tools/TwoStepCaptcha'
 import { mapActions } from 'vuex'
 import { timeFix } from '@/utils/util'
-import { getSmsCaptcha } from '@/api/login'
+import servicePath from '@/api'
 import axios from 'axios'
 export default {
   components: {
@@ -183,7 +183,7 @@ export default {
           loginParams[!state.loginType ? 'email' : 'identifiers'] = values.identifiers
           loginParams.password = values.password
           axios({
-            url: `${this.$url}/auth/local`,
+            url: servicePath.userLogin,
             method: 'post',
             headers: {
               'Content-Type': 'application/json'
@@ -221,22 +221,6 @@ export default {
               window.clearInterval(interval)
             }
           }, 1000)
-
-          const hide = this.$message.loading('验证码发送中..', 0)
-          getSmsCaptcha({ mobile: values.mobile }).then(res => {
-            setTimeout(hide, 2500)
-            this.$notification['success']({
-              message: '提示',
-              description: '验证码获取成功，您的验证码为：' + res.result.captcha,
-              duration: 8
-            })
-          }).catch(err => {
-            setTimeout(hide, 1)
-            clearInterval(interval)
-            state.time = 60
-            state.smsSendBtn = false
-            this.requestFailed(err)
-          })
         }
       })
     },
