@@ -1,6 +1,5 @@
 import api from './index'
 import { axios } from '@/utils/request'
-
 /**
  * login func
  * parameter: {
@@ -12,13 +11,16 @@ import { axios } from '@/utils/request'
  * @param parameter
  * @returns {*}
  */
-export function login (parameter) {
-  return axios({
-    url: '/auth/login',
-    method: 'post',
-    data: parameter
-  })
-}
+// export function login (parameter) {
+//   return axios({
+//     url: 'http://47.56.180.125/auth/local',
+//     method: 'post',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     data: parameter
+//   })
+// }
 
 export function getSmsCaptcha (parameter) {
   return axios({
