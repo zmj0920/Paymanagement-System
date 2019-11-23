@@ -4,7 +4,17 @@ http://47.56.180.125/documentation
 
 qingfeng
 
-
+{
+  "name": "通道1frompost",
+  "channelType": "alipay",
+  "transactionType": "h51",
+  "limitedAcmoutOfDay": 1,
+  "limitedNumberOfDay": 1,
+  "isRepeatedArrange": true,
+  "isAvailable": true,
+  "channelgroup": 1,
+   "channelAccount":"test"
+}
 
 
 {
