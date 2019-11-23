@@ -62,6 +62,7 @@
     >
       <template v-slot:buttons>
         <vxe-button @click="channelsDelete">删除</vxe-button>
+        <vxe-button @click="handleEdit">编辑</vxe-button>
       </template>
     </vxe-toolbar>
     <vxe-table
@@ -96,6 +97,42 @@
       :layouts="['PrevPage', 'JumpNumber', 'NextPage', 'FullJump', 'Sizes', 'Total']"
       @page-change="handlePageChange">
     </vxe-pager>
+    <a-modal
+      title="编辑"
+      :width="800"
+      v-model="visible"
+      @ok="handleOk"
+    >
+      <a-form :autoFormCreate="(form)=>{this.form = form}">
+        <a-form-item label="通道名称">
+          <a-input placeholder="通道名称" v-model="mdl.name"/>
+        </a-form-item>
+        <a-form-item label="渠道类型">
+          <a-input placeholder="渠道类型" v-model="mdl.channelType" />
+        </a-form-item>
+        <a-form-item label="交易类型">
+          <a-input placeholder="交易类型" v-model="mdl.transactionType" />
+        </a-form-item>
+        <a-form-item label="当天限额">
+          <a-input placeholder="当天限额" v-model="mdl.limitedAcmoutOfDay" />
+        </a-form-item>
+        <a-form-item label="当天限笔">
+          <a-input placeholder="当天限笔" v-model="mdl.limitedNumberOfDay" />
+        </a-form-item>
+        <a-form-item label="是否重新分配">
+          <a-input placeholder="是否重新分配" v-model="mdl.isRepeatedArrange" />
+        </a-form-item>
+        <a-form-item label="是否可用">
+          <a-input placeholder="是否可用" v-model="mdl.isAvailable" />
+        </a-form-item>
+        <!-- <a-form-item label="通道组名称">
+          <a-input placeholder="通道组名称" v-model="mdl.channelgroup[0].name" />
+        </a-form-item> -->
+        <a-form-item label="渠道的账号">
+          <a-input placeholder="渠道的账号" v-model="mdl.channelAccount" />
+        </a-form-item>
+      </a-form>
+    </a-modal>
   </div>
 </template>
 <script>
@@ -105,6 +142,8 @@ export default {
   components: {},
   data () {
     return {
+      mdl: {},
+      visible: false,
       loading: false,
       tablePage: {
         total: 0,
@@ -117,6 +156,12 @@ export default {
     }
   },
   methods: {
+    handleEdit () {
+      const removeRecords = this.$refs.xTable.getSelectRecords()
+      this.mdl = Object.assign({}, removeRecords[0])
+      console.log(this.mdl)
+      this.visible = true
+    },
     channelsDelete () {
       const removeRecords = this.$refs.xTable.getSelectRecords()
       // this.$XModal.alert(JSON.stringify(removeRecords[0].id))
