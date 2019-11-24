@@ -28,19 +28,18 @@
           </a-col>
           <a-col :md="7" :sm="24">
             <a-form-item label="渠道类型">
-              <a-select placeholder="请选择渠道类型" default-value="0">
-                <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">支付宝</a-select-option>
+              <a-select placeholder="请选择渠道类型" >
+                <a-select-option value="alipay">alipay</a-select-option>
+                <a-select-option value="wechat">wechat</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
           <a-col :md="7" :sm="24">
             <a-form-item label="交易类型">
-              <a-select placeholder="请选择交易类型" default-value="0">
-                <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">H5</a-select-option>
-                <a-select-option value="2">f2f</a-select-option>
-                <a-select-option value="2">ws设备</a-select-option>
+              <a-select placeholder="请选择交易类型" >
+                <a-select-option value="h5">h5</a-select-option>
+                <a-select-option value="pc">pc</a-select-option>
+                <a-select-option value="app">app</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>

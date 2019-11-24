@@ -61,7 +61,7 @@ export const asyncRouterMap = [
             path: '/dashboard/zf_query',
             name: 'zf_query',
             component: () => import('@/views/transaction_management/zf_query/Index'),
-            meta: { title: '支付查询', keepAlive: false, permission: ['dashboard'] }
+            meta: { title: '支付订单', keepAlive: false, permission: ['dashboard'] }
           },
           {
             path: '/dashboard/df_order',
