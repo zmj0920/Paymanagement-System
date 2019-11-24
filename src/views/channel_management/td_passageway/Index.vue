@@ -128,6 +128,7 @@
       <p><label>渠道的账号:</label><a-input placeholder="渠道的账号" style="width: 200px" v-model="mdl.channelAccount" /></p>
       <p><a-checkbox v-model="mdl.isRepeatedArrange">是否重新分配</a-checkbox></p>
       <p><a-checkbox v-model="mdl.isAvailable">是否可用</a-checkbox></p>
+      <a-button type="primary" @click="updateChannel()">保存</a-button>
       </a-form>
     </a-modal>
 
@@ -217,6 +218,40 @@ export default {
         .then(res => {
           if (res.status === 200) {
             this.tableData = res.data
+          }
+        })
+        .catch(err => console.log(err))
+    },
+    updateChannel () {
+      axios({
+        url: `${servicePath.updateChannel}/${this.mdl.id}`,
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.$store.getters.token}`
+        },
+        data: {
+          'name': this.mdl.name,
+          'channelType': this.mdl.channelType,
+          'transactionType': this.mdl.transactionType,
+          'limitedAcmoutOfDay': this.mdl.limitedAcmoutOfDay,
+          'limitedNumberOfDay': this.mdl.limitedNumberOfDay,
+          'isRepeatedArrange': this.mdl.isRepeatedArrange,
+          'isAvailable': this.mdl.isAvailable,
+          'channelgroup': 1,
+          'channelAccount': this.mdl.channelAccount
+        }
+      })
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            this.init()
+            this.visible = false
+            setTimeout(() => {
+              this.$notification.success({
+                message: '修改成功'
+              })
+            }, 1000)
           }
         })
         .catch(err => console.log(err))

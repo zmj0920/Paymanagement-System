@@ -8,7 +8,7 @@
               <a-input placeholder="ID名称" v-model="sousuo.name" />
             </a-form-item>
           </a-col>
-          <a-col :md="7" :sm="24">
+          <!-- <a-col :md="7" :sm="24">
             <a-form-item label="分组">
               <a-select placeholder="请选择分组" default-value="0">
                 <a-select-option value="0">全部</a-select-option>
@@ -43,7 +43,7 @@
                 <a-select-option value="2">ws设备</a-select-option>
               </a-select>
             </a-form-item>
-          </a-col>
+          </a-col> -->
 
           <a-col :md="7" :sm="24">
             <span class="table-page-search-submitButtons">
@@ -113,6 +113,7 @@
         </a-select>
       </p>
       <p><a-checkbox v-model="mdl.isAvailable">是否可用</a-checkbox></p>
+      <a-button type="primary" @click="updateChannel()">保存</a-button>
     </a-modal>
 
     <a-modal
@@ -131,7 +132,7 @@
         </a-select>
       </p>
       <p><a-checkbox v-model="mdl1.isAvailable">是否可用</a-checkbox></p>
-      <a-button type="primary" @click="addChannels()">保存</a-button>
+      <a-button type="primary" @click="addChannels()" >保存</a-button>
     </a-modal>
   </div>
 </template>
@@ -149,8 +150,8 @@ export default {
         name: ''
       },
       mdl1: {
-        'name': 'shanghongyun',
-        'routeRule': 'rr',
+        'name': '',
+        'routeRule': '',
         'isAvailable': true
       },
       loading: false,
@@ -189,6 +190,34 @@ export default {
         })
         .catch(err => console.log(err))
     },
+    updateChannel () {
+      axios({
+        url: `${servicePath.updateChannelGroups}/${this.mdl.id}`,
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.$store.getters.token}`
+        },
+        data: {
+          'name': this.mdl.name,
+          'routeRule': this.mdl.routeRule,
+          'isAvailable': this.mdl.isAvailable
+        }
+      })
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            this.init()
+            this.visible = false
+            setTimeout(() => {
+              this.$notification.success({
+                message: '修改成功'
+              })
+            }, 1000)
+          }
+        })
+        .catch(err => console.log(err))
+    },
     addChannels () {
       axios({
         url: servicePath.addChannelGroups,
@@ -199,14 +228,8 @@ export default {
         },
         data: {
           'name': this.mdl1.name,
-          'channelType': this.mdl1.channelType,
-          'transactionType': this.mdl1.transactionType,
-          'limitedAcmoutOfDay': this.mdl1.limitedAcmoutOfDay,
-          'limitedNumberOfDay': this.mdl1.limitedNumberOfDay,
-          'isRepeatedArrange': this.mdl1.isRepeatedArrange,
-          'isAvailable': this.mdl1.isAvailable,
-          'channelgroup': 1,
-          'channelAccount': this.mdl1.channelAccount
+          'routeRule': this.mdl1.routeRule,
+          'isAvailable': this.mdl1.isAvailable
         }
       })
         .then(res => {
