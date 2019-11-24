@@ -15,7 +15,7 @@ export const asyncRouterMap = [
         name: 'ybp',
         // redirect: '/dashboard/workplace',
         component: () => import('@/views/dashboard/Workplace'),
-        meta: { title: '仪表盘', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] }
+        meta: { title: '首页', keepAlive: true, icon: bxAnaalyse, permission: ['dashboard'] }
       },
       {
         path: '/tdgl',

@@ -4,13 +4,6 @@
       <a-col :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
         <a-card title="登录日志" class="project-list" style="margin-bottom: 24px;" :bordered="false">
           <a slot="extra">全部日志</a>
-          <vxe-table highlight-hover-row border height="300" :data="tableData">
-            <vxe-table-column type="index" title="序号" width="60"></vxe-table-column>
-            <vxe-table-column field="name" title="姓名"></vxe-table-column>
-            <vxe-table-column field="sex" title="性别"></vxe-table-column>
-            <vxe-table-column field="age" title="年龄"></vxe-table-column>
-            <vxe-table-column field="address" title="地址" show-overflow></vxe-table-column>
-          </vxe-table>
         </a-card>
         <a-card style="margin-bottom: 24px" title="操作记录" :bordered="false">
           <a slot="extra">全部记录</a>
@@ -64,18 +57,7 @@ export default {
   components: {},
   data () {
     return {
-      tableData: [
-        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
-        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
-        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
-        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
-        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
-        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
-        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
-        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
-        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' },
-        { index: 1, name: 'xiaoming', sex: '男', age: 18, address: '上海' }
-      ]
+
     }
   },
   created () {},

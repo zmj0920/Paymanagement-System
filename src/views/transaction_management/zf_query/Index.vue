@@ -85,11 +85,11 @@
       <vxe-table-column field="fee" width="150" title="交易手续费"></vxe-table-column>
       <vxe-table-column field="status" width="150" title="订单状态"></vxe-table-column>
       <vxe-table-column field="notifyStatus" width="150" title="推送订单状态"></vxe-table-column>
-      <vxe-table-column field="created_at" width="200" title="订单时间"></vxe-table-column>
+      <vxe-table-column field="created_at" width="200" :formatter="formatterDate" title="订单时间"></vxe-table-column>
       <vxe-table-column title="操作" width="200" fixed="right">
         <template v-slot="{ row }">
-          <vxe-button @click="channelsDelete(row)">删除</vxe-button>
-          <vxe-button @click="handleEdit(row)">编辑</vxe-button>
+          <vxe-button @click="channelsDelete(row)">验证</vxe-button>
+          <vxe-button @click="handleEdit(row)">补单</vxe-button>
         </template>
       </vxe-table-column>
     </vxe-table>
@@ -207,6 +207,10 @@ export default {
     }
   },
   methods: {
+    formatterDate ({ cellValue }) {
+      var d = new Date(cellValue)
+      return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+    },
     selectChannels () {
       // eslint-disable-next-line no-unused-vars
       var urls = `${servicePath.orders}?`
