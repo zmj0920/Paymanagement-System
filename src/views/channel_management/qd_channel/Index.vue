@@ -96,6 +96,7 @@ export default {
         pageSizes: [10, 20, 50, 100, 200, 500]
       },
       tableColumn: [
+        { type: 'checkbox', remoteSort: true },
         { field: 'id', title: '通道ID', remoteSort: true },
         { field: 'name', title: '通道名称' },
         { field: 'channelType', title: '渠道类型' },
