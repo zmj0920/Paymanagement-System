@@ -1,6 +1,7 @@
 <template>
   <div>
     接口调试
+    {{ this.$store.getters.userInfo }}
   </div>
 </template>
 
@@ -9,6 +10,12 @@ export default {
   data () {
     return {
     }
+  },
+  methods: {
+
+  },
+  mounted () {
+    console.log(this.$store.getters.userInfo)
   }
 }
 </script>

@@ -59,6 +59,7 @@
       title="编辑"
       v-model="visible"
       class="model-item"
+      :footer="null"
     >
       <p><label>通道组名称:</label> <a-input placeholder="通道组名称" v-model="mdl.name" style="width: 200px"/></p>
       <p><label>路由规则:</label>
@@ -70,13 +71,14 @@
         </a-select>
       </p>
       <p><a-checkbox v-model="mdl.isAvailable">是否可用</a-checkbox></p>
-      <a-button type="primary" @click="updateChannel()">保存</a-button>
+      <a-button type="primary" style="width: 200px" @click="updateChannel()">保存</a-button>
     </a-modal>
 
     <a-modal
       title="添加"
       v-model="visible1"
       class="model-item"
+      :footer="null"
     >
       <p><label>通道组名称:</label> <a-input placeholder="通道组名称" v-model="mdl1.name" style="width: 200px"/></p>
       <p><label>路由规则:</label>
@@ -88,7 +90,7 @@
         </a-select>
       </p>
       <p><a-checkbox v-model="mdl1.isAvailable">是否可用</a-checkbox></p>
-      <a-button type="primary" @click="addChannels()" >保存</a-button>
+      <a-button type="primary" style="width: 200px" @click="addChannels()" >保存</a-button>
     </a-modal>
   </div>
 </template>
