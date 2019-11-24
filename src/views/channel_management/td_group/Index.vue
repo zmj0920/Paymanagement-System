@@ -8,43 +8,6 @@
               <a-input placeholder="ID名称" v-model="sousuo.name" />
             </a-form-item>
           </a-col>
-          <!-- <a-col :md="7" :sm="24">
-            <a-form-item label="分组">
-              <a-select placeholder="请选择分组" default-value="0">
-                <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">分组111</a-select-option>
-                <a-select-option value="2">运行中</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :md="7" :sm="24">
-            <a-form-item label="状态">
-              <a-select placeholder="请选择状态" default-value="0">
-                <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">启用</a-select-option>
-                <a-select-option value="2">关闭</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :md="7" :sm="24">
-            <a-form-item label="渠道类型">
-              <a-select placeholder="请选择渠道类型" default-value="0">
-                <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">支付宝</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :md="7" :sm="24">
-            <a-form-item label="交易类型">
-              <a-select placeholder="请选择交易类型" default-value="0">
-                <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">H5</a-select-option>
-                <a-select-option value="2">f2f</a-select-option>
-                <a-select-option value="2">ws设备</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col> -->
-
           <a-col :md="7" :sm="24">
             <span class="table-page-search-submitButtons">
               <a-button type="primary" @click="selectChannels()">查询</a-button>
@@ -57,13 +20,8 @@
     <vxe-toolbar
       setting
       export
-      :buttons="toolbarButtons"
       :refresh="{query: init}"
     >
-      <!-- <template v-slot:buttons>
-        <vxe-button @click="channelsDelete">删除</vxe-button>
-        <vxe-button @click="handleEdit">编辑</vxe-button>
-      </template> -->
     </vxe-toolbar>
     <vxe-table
       border
@@ -80,7 +38,7 @@
       <vxe-table-column field="user.username" width="150" title="所属用户" sortable></vxe-table-column>
       <vxe-table-column field="name" width="150" title="通道组名称"></vxe-table-column>
       <vxe-table-column field="routeRule" width="150" title="路由规则"></vxe-table-column>
-      <vxe-table-column field="isAvailable" width="150" title="是否可用"></vxe-table-column>
+      <vxe-table-column field="isAvailable" width="150" :formatter="formatterTrue" title="是否可用"></vxe-table-column>
       <vxe-table-column title="操作" width="200" fixed="right">
         <template v-slot="{ row }">
           <vxe-button @click="channelsDelete(row)">删除</vxe-button>
@@ -100,7 +58,6 @@
     <a-modal
       title="编辑"
       v-model="visible"
-      @ok="handleOk"
       class="model-item"
     >
       <p><label>通道组名称:</label> <a-input placeholder="通道组名称" v-model="mdl.name" style="width: 200px"/></p>
@@ -119,7 +76,6 @@
     <a-modal
       title="添加"
       v-model="visible1"
-      @ok="handleOk"
       class="model-item"
     >
       <p><label>通道组名称:</label> <a-input placeholder="通道组名称" v-model="mdl1.name" style="width: 200px"/></p>
@@ -166,7 +122,13 @@ export default {
     }
   },
   methods: {
-
+    formatterTrue ({ cellValue }) {
+      if (cellValue === true) {
+        return '是'
+      } else {
+        return '否'
+      }
+    },
     selectChannels () {
       // eslint-disable-next-line no-unused-vars
       var urls = `${servicePath.channelGroups}?`

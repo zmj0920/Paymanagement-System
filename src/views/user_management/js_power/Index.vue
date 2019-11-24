@@ -1,6 +1,6 @@
 <template>
   <div>
-    支付查询
+    角色权限
   </div>
 </template>
 

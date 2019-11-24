@@ -1,6 +1,6 @@
 <template>
   <div>
-    角色权限
+    用户
   </div>
 </template>
 

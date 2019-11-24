@@ -56,7 +56,6 @@
     <vxe-toolbar
       setting
       export
-      :buttons="toolbarButtons"
       :refresh="{query: init}"
     >
       <!-- <template v-slot:buttons>
@@ -81,8 +80,8 @@
       <vxe-table-column field="transactionType" width="150" title="交易类型"></vxe-table-column>
       <vxe-table-column field="limitedAcmoutOfDay" width="150" title="当天限额"></vxe-table-column>
       <vxe-table-column field="limitedNumberOfDay" width="150" title="当天限笔"></vxe-table-column>
-      <vxe-table-column field="isRepeatedArrange" width="150" title="是否重新分配"></vxe-table-column>
-      <vxe-table-column field="isAvailable" width="150" title="是否可用"></vxe-table-column>
+      <vxe-table-column field="isRepeatedArrange" :formatter="formatterTrue" width="150" title="是否重新分配"></vxe-table-column>
+      <vxe-table-column field="isAvailable" width="150" :formatter="formatterTrue" title="是否可用"></vxe-table-column>
       <vxe-table-column field="channelAccount" width="150" title="渠道的账号"></vxe-table-column>
       <vxe-table-column field="isOnline" width="150" title="是否在线"></vxe-table-column>
       <vxe-table-column field="channelgroup.name" width="150" title="通道组名称"></vxe-table-column>
@@ -105,7 +104,6 @@
     <a-modal
       title="编辑"
       v-model="visible"
-      @ok="handleOk"
       class="model-item"
     >
       <p><label>通道名称:</label> <a-input placeholder="通道名称" v-model="mdl.name" style="width: 200px"/></p>
@@ -134,7 +132,6 @@
     <a-modal
       title="添加"
       v-model="visible1"
-      @ok="handleOk"
       class="model-item"
     >
       <p><label>通道名称:</label> <a-input placeholder="通道名称" v-model="mdl1.name" style="width: 200px"/></p>
@@ -196,9 +193,14 @@ export default {
     }
   },
   methods: {
-
+    formatterTrue ({ cellValue }) {
+      if (cellValue === true) {
+        return '是'
+      } else {
+        return '否'
+      }
+    },
     selectChannels () {
-      alert(123)
       // eslint-disable-next-line no-unused-vars
       var urls = `${servicePath.channels}?`
 
