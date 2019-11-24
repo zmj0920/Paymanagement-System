@@ -13,7 +13,7 @@
         @change="handleTabClick"
       >
         <a-tab-pane key="tab1" tab="后台管理系统登录入口">
-          <a-alert v-if="isLoginError" type="error" showIcon style="margin-bottom: 24px;" message="账户或密码错误（admin/123456)" />
+          <a-alert v-if="isLoginError" type="error" showIcon style="margin-bottom: 24px;" message="账户或密码错误" />
           <a-form-item>
             <a-input
               size="large"
