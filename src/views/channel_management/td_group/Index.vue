@@ -76,17 +76,11 @@
       :checkbox-config="{reserve: true}"
       :data="tableData">
       <vxe-table-column type="checkbox" width="30"></vxe-table-column>
-      <vxe-table-column field="id" width="80" title="通道ID"></vxe-table-column>
-      <vxe-table-column field="name" width="150" title="通道名称" sortable></vxe-table-column>
-      <vxe-table-column field="channelType" width="150" title="渠道类型"></vxe-table-column>
-      <vxe-table-column field="transactionType" width="150" title="交易类型"></vxe-table-column>
-      <vxe-table-column field="limitedAcmoutOfDay" width="150" title="当天限额"></vxe-table-column>
-      <vxe-table-column field="limitedNumberOfDay" width="150" title="当天限笔"></vxe-table-column>
-      <vxe-table-column field="isRepeatedArrange" width="150" title="是否重新分配"></vxe-table-column>
+      <vxe-table-column field="id" width="80" title="通道组ID"></vxe-table-column>
+      <vxe-table-column field="user.username" width="150" title="所属用户" sortable></vxe-table-column>
+      <vxe-table-column field="name" width="150" title="通道组名称"></vxe-table-column>
+      <vxe-table-column field="routeRule" width="150" title="路由规则"></vxe-table-column>
       <vxe-table-column field="isAvailable" width="150" title="是否可用"></vxe-table-column>
-      <vxe-table-column field="channelAccount" width="150" title="渠道的账号"></vxe-table-column>
-      <vxe-table-column field="isOnline" width="150" title="是否在线"></vxe-table-column>
-      <vxe-table-column field="channelgroup.name" width="150" title="通道组名称"></vxe-table-column>
       <vxe-table-column title="操作" width="200" fixed="right">
         <template v-slot="{ row }">
           <vxe-button @click="channelsDelete(row)">删除</vxe-button>
@@ -109,15 +103,16 @@
       @ok="handleOk"
       class="model-item"
     >
-      <p><label>通道名称:</label> <a-input placeholder="通道名称" v-model="mdl.name" style="width: 200px"/></p>
-      <p><label>渠道类型:</label><a-input placeholder="渠道类型" style="width: 200px" v-model="mdl.channelType" /></p>
-      <p><label>交易类型:</label><a-input placeholder="交易类型" style="width: 200px" v-model="mdl.transactionType" /></p>
-      <p><label>当天限额:</label><a-input placeholder="当天限额" style="width: 200px" v-model="mdl.limitedAcmoutOfDay" /></p>
-      <p><label>当天限笔:</label><a-input placeholder="当天限笔" style="width: 200px" v-model="mdl.limitedNumberOfDay" /></p>
-      <p><label>渠道的账号:</label><a-input placeholder="渠道的账号" style="width: 200px" v-model="mdl.channelAccount" /></p>
-      <p><a-checkbox v-model="mdl.isRepeatedArrange">是否重新分配</a-checkbox></p>
+      <p><label>通道组名称:</label> <a-input placeholder="通道组名称" v-model="mdl.name" style="width: 200px"/></p>
+      <p><label>路由规则:</label>
+        <a-select placeholder="请选择路由规则" style="width: 200px" v-model="mdl.routeRule" default-value="0">
+          <a-select-option value="rr">rr</a-select-option>
+          <a-select-option value="iphash">iphash</a-select-option>
+          <a-select-option value="lessAmountPriority">lessAmountPriority</a-select-option>
+          <a-select-option value="moreAmountPriority">moreAmountPriority</a-select-option>
+        </a-select>
+      </p>
       <p><a-checkbox v-model="mdl.isAvailable">是否可用</a-checkbox></p>
-      </a-form>
     </a-modal>
 
     <a-modal
@@ -126,16 +121,17 @@
       @ok="handleOk"
       class="model-item"
     >
-      <p><label>通道名称:</label> <a-input placeholder="通道名称" v-model="mdl1.name" style="width: 200px"/></p>
-      <p><label>渠道类型:</label><a-input placeholder="渠道类型" style="width: 200px" v-model="mdl1.channelType" /></p>
-      <p><label>交易类型:</label><a-input placeholder="交易类型" style="width: 200px" v-model="mdl1.transactionType" /></p>
-      <p><label>当天限额:</label><a-input placeholder="当天限额" style="width: 200px" v-model="mdl1.limitedAcmoutOfDay" /></p>
-      <p><label>当天限笔:</label><a-input placeholder="当天限笔" style="width: 200px" v-model="mdl1.limitedNumberOfDay" /></p>
-      <p><label>渠道的账号:</label><a-input placeholder="渠道的账号" style="width: 200px" v-model="mdl1.channelAccount" /></p>
-      <p><a-checkbox v-model="mdl1.isRepeatedArrange">是否重新分配</a-checkbox></p>
+      <p><label>通道组名称:</label> <a-input placeholder="通道组名称" v-model="mdl1.name" style="width: 200px"/></p>
+      <p><label>路由规则:</label>
+        <a-select placeholder="请选择路由规则" style="width: 200px" v-model="mdl1.routeRule" default-value="0">
+          <a-select-option value="rr">rr</a-select-option>
+          <a-select-option value="iphash">iphash</a-select-option>
+          <a-select-option value="lessAmountPriority">lessAmountPriority</a-select-option>
+          <a-select-option value="moreAmountPriority">moreAmountPriority</a-select-option>
+        </a-select>
+      </p>
       <p><a-checkbox v-model="mdl1.isAvailable">是否可用</a-checkbox></p>
       <a-button type="primary" @click="addChannels()">保存</a-button>
-      </a-form>
     </a-modal>
   </div>
 </template>
@@ -153,15 +149,10 @@ export default {
         name: ''
       },
       mdl1: {
-        'name': '通道1frompost',
-        'channelType': 'alipay',
-        'transactionType': 'h51',
-        'limitedAcmoutOfDay': 1,
-        'limitedNumberOfDay': 1,
-        'isRepeatedArrange': true,
-        'isAvailable': true,
-        'channelgroup': 1,
-        'channelAccount': 'test' },
+        'name': 'shanghongyun',
+        'routeRule': 'rr',
+        'isAvailable': true
+      },
       loading: false,
       tablePage: {
         total: 0,
@@ -176,9 +167,8 @@ export default {
   methods: {
 
     selectChannels () {
-      alert(123)
       // eslint-disable-next-line no-unused-vars
-      var urls = `${servicePath.channels}?`
+      var urls = `${servicePath.channelGroups}?`
 
       if (this.sousuo.name !== '') {
         // eslint-disable-next-line no-const-assign
@@ -201,7 +191,7 @@ export default {
     },
     addChannels () {
       axios({
-        url: servicePath.addChannel,
+        url: servicePath.addChannelGroups,
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -239,7 +229,7 @@ export default {
     },
     channelsDelete (row) {
       axios({
-        url: `${servicePath.channelsDelete}/${row.id}`,
+        url: `${servicePath.channelGroupsDelete}/${row.id}`,
         method: 'delete',
         headers: {
           'Content-Type': 'application/json',
@@ -266,7 +256,7 @@ export default {
     },
     init () {
       axios({
-        url: `${servicePath.channels}?_start=${(this.tablePage.currentPage - 1) * this.tablePage.pageSize}&_limit=${this.tablePage.pageSize}`,
+        url: `${servicePath.channelGroups}?_start=${(this.tablePage.currentPage - 1) * this.tablePage.pageSize}&_limit=${this.tablePage.pageSize}`,
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
@@ -281,7 +271,7 @@ export default {
         .catch(err => console.log(err))
       // 查询条数
       axios({
-        url: servicePath.channelsCount,
+        url: servicePath.channelGroupsCount,
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
