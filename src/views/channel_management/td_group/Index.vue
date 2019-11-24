@@ -86,6 +86,17 @@
       <vxe-table-column field="channelAccount" title="渠道的账号"></vxe-table-column>
       <vxe-table-column field="isOnline" title="是否在线"></vxe-table-column>
       <vxe-table-column field="channelgroup.name" title="通道组名称"></vxe-table-column>
+      <vxe-table-column title="操作">
+        <template v-slot="{ row }">
+          <template v-if="$refs.xTable.isActiveByRow(row)">
+            <vxe-button @click="saveRowEvent(row)">保存</vxe-button>
+            <vxe-button @click="cancelRowEvent(row)">取消</vxe-button>
+          </template>
+          <template v-else>
+            <vxe-button @click="editRowEvent(row)">编辑</vxe-button>
+          </template>
+        </template>
+      </vxe-table-column>
     </vxe-table>
     <vxe-pager
       perfect
@@ -117,6 +128,9 @@ export default {
     }
   },
   methods: {
+    editRowEvent (row) {
+      alert(JSON.stringify(row))
+    },
     channelsDelete () {
       const removeRecords = this.$refs.xTable.getSelectRecords()
       // this.$XModal.alert(JSON.stringify(removeRecords[0].id))

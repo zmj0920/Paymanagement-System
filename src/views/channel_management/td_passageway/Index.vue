@@ -60,10 +60,10 @@
       :buttons="toolbarButtons"
       :refresh="{query: init}"
     >
-      <template v-slot:buttons>
+      <!-- <template v-slot:buttons>
         <vxe-button @click="channelsDelete">删除</vxe-button>
         <vxe-button @click="handleEdit">编辑</vxe-button>
-      </template>
+      </template> -->
     </vxe-toolbar>
     <vxe-table
       border
@@ -76,17 +76,23 @@
       :checkbox-config="{reserve: true}"
       :data="tableData">
       <vxe-table-column type="checkbox" width="30"></vxe-table-column>
-      <vxe-table-column field="id" title="通道ID"></vxe-table-column>
-      <vxe-table-column field="name" title="通道名称" sortable></vxe-table-column>
-      <vxe-table-column field="channelType" title="渠道类型"></vxe-table-column>
-      <vxe-table-column field="transactionType" title="交易类型"></vxe-table-column>
-      <vxe-table-column field="limitedAcmoutOfDay" title="当天限额"></vxe-table-column>
-      <vxe-table-column field="limitedNumberOfDay" title="当天限笔"></vxe-table-column>
-      <vxe-table-column field="isRepeatedArrange" title="是否重新分配"></vxe-table-column>
-      <vxe-table-column field="isAvailable" title="是否可用"></vxe-table-column>
-      <vxe-table-column field="channelAccount" title="渠道的账号"></vxe-table-column>
-      <vxe-table-column field="isOnline" title="是否在线"></vxe-table-column>
-      <vxe-table-column field="channelgroup.name" title="通道组名称"></vxe-table-column>
+      <vxe-table-column field="id" width="80" title="通道ID"></vxe-table-column>
+      <vxe-table-column field="name" width="150" title="通道名称" sortable></vxe-table-column>
+      <vxe-table-column field="channelType" width="150" title="渠道类型"></vxe-table-column>
+      <vxe-table-column field="transactionType" width="150" title="交易类型"></vxe-table-column>
+      <vxe-table-column field="limitedAcmoutOfDay" width="150" title="当天限额"></vxe-table-column>
+      <vxe-table-column field="limitedNumberOfDay" width="150" title="当天限笔"></vxe-table-column>
+      <vxe-table-column field="isRepeatedArrange" width="150" title="是否重新分配"></vxe-table-column>
+      <vxe-table-column field="isAvailable" width="150" title="是否可用"></vxe-table-column>
+      <vxe-table-column field="channelAccount" width="150" title="渠道的账号"></vxe-table-column>
+      <vxe-table-column field="isOnline" width="150" title="是否在线"></vxe-table-column>
+      <vxe-table-column field="channelgroup.name" width="150" title="通道组名称"></vxe-table-column>
+      <vxe-table-column title="操作" width="200" fixed="right">
+        <template v-slot="{ row }">
+          <vxe-button @click="channelsDelete(row)">删除</vxe-button>
+          <vxe-button @click="handleEdit(row)">编辑</vxe-button>
+        </template>
+      </vxe-table-column>
     </vxe-table>
     <vxe-pager
       perfect
@@ -227,17 +233,13 @@ export default {
         })
         .catch(err => console.log(err))
     },
-    handleEdit () {
-      const removeRecords = this.$refs.xTable.getSelectRecords()
-      this.mdl = Object.assign({}, removeRecords[0])
-      console.log(this.mdl)
+    handleEdit (row) {
+      this.mdl = Object.assign({}, row)
       this.visible = true
     },
-    channelsDelete () {
-      const removeRecords = this.$refs.xTable.getSelectRecords()
-      // this.$XModal.alert(JSON.stringify(removeRecords[0].id))
+    channelsDelete (row) {
       axios({
-        url: `${servicePath.channelsDelete}/${removeRecords[0].id}`,
+        url: `${servicePath.channelsDelete}/${row.id}`,
         method: 'delete',
         headers: {
           'Content-Type': 'application/json',
@@ -247,7 +249,7 @@ export default {
         .then(res => {
           console.log(res)
           if (res.status === 200) {
-            this.$refs.xTable.removeSelecteds()
+            this.init()
             setTimeout(() => {
               this.$notification.success({
                 message: '删除成功'
