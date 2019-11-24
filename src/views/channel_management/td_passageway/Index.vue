@@ -110,8 +110,19 @@
       class="model-item"
     >
       <p><label>通道名称:</label> <a-input placeholder="通道名称" v-model="mdl.name" style="width: 200px"/></p>
-      <p><label>渠道类型:</label><a-input placeholder="渠道类型" style="width: 200px" v-model="mdl.channelType" /></p>
-      <p><label>交易类型:</label><a-input placeholder="交易类型" style="width: 200px" v-model="mdl.transactionType" /></p>
+      <p><label>渠道类型:</label>
+        <a-select placeholder="请选择渠道类型" style="width: 200px" v-model="mdl.channelType" >
+          <a-select-option value="apilay">apilay</a-select-option>
+          <a-select-option value="wechat">wechat</a-select-option>
+        </a-select>
+      </p>
+      <p><label>交易类型:</label>
+        <a-select placeholder="请选择交易类型" style="width: 200px" v-model="mdl.transactionType" >
+          <a-select-option value="h5">h5</a-select-option>
+          <a-select-option value="pc">pc</a-select-option>
+          <a-select-option value="app">app</a-select-option>
+        </a-select>
+      </p>
       <p><label>当天限额:</label><a-input placeholder="当天限额" style="width: 200px" v-model="mdl.limitedAcmoutOfDay" /></p>
       <p><label>当天限笔:</label><a-input placeholder="当天限笔" style="width: 200px" v-model="mdl.limitedNumberOfDay" /></p>
       <p><label>渠道的账号:</label><a-input placeholder="渠道的账号" style="width: 200px" v-model="mdl.channelAccount" /></p>
@@ -127,8 +138,19 @@
       class="model-item"
     >
       <p><label>通道名称:</label> <a-input placeholder="通道名称" v-model="mdl1.name" style="width: 200px"/></p>
-      <p><label>渠道类型:</label><a-input placeholder="渠道类型" style="width: 200px" v-model="mdl1.channelType" /></p>
-      <p><label>交易类型:</label><a-input placeholder="交易类型" style="width: 200px" v-model="mdl1.transactionType" /></p>
+      <p><label>渠道类型:</label>
+        <a-select placeholder="请选择渠道类型" style="width: 200px" v-model="mdl1.channelType" >
+          <a-select-option value="apilay">apilay</a-select-option>
+          <a-select-option value="wechat">wechat</a-select-option>
+        </a-select>
+      </p>
+      <p><label>交易类型:</label>
+        <a-select placeholder="请选择交易类型" style="width: 200px" v-model="mdl1.transactionType" >
+          <a-select-option value="h5">h5</a-select-option>
+          <a-select-option value="pc">pc</a-select-option>
+          <a-select-option value="app">app</a-select-option>
+        </a-select>
+      </p>
       <p><label>当天限额:</label><a-input placeholder="当天限额" style="width: 200px" v-model="mdl1.limitedAcmoutOfDay" /></p>
       <p><label>当天限笔:</label><a-input placeholder="当天限笔" style="width: 200px" v-model="mdl1.limitedNumberOfDay" /></p>
       <p><label>渠道的账号:</label><a-input placeholder="渠道的账号" style="width: 200px" v-model="mdl1.channelAccount" /></p>
