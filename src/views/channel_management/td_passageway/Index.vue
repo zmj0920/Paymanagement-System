@@ -180,7 +180,8 @@
         :formatter="formatterBadge"
       >
         <template v-slot="{ row }">
-          <a-badge status="default" v-model="row.isOnline" />
+          <a-badge status="default" text="已下线" v-show="row.isOnline==null" />
+          <a-badge status="success" text="在线" v-show="row.isOnline!=null" />
         </template>
       </vxe-table-column>
       <vxe-table-column

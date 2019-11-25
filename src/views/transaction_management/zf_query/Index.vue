@@ -125,65 +125,92 @@
       <vxe-table-column
         type="checkbox"
         width="40"
+        align="center"
       />
       <vxe-table-column
         field="id"
         width="80"
         title="订单ID"
         sortable
+        align="center"
       />
       <vxe-table-column
         field="merchantOrderId"
         width="320"
         title="商户订单号"
         sortable
+        align="center"
       />
       <vxe-table-column
         field="user.username"
         width="150"
         title="所属用户"
         sortable
+        align="center"
       />
       <vxe-table-column
         field="channelType"
         width="150"
         title="渠道类型"
+        align="center"
       />
       <vxe-table-column
         field="transactionType"
         width="150"
         title="交易类型"
+        align="center"
       />
       <vxe-table-column
         field="amount"
         width="150"
         title="交易金额(单位 分)"
+        :formatter="formatterNumberOfDay"
+        align="center"
       />
       <vxe-table-column
         field="fee"
         width="150"
         title="交易手续费"
+        :formatter="formatterNumberOfDay"
+        align="center"
       />
       <vxe-table-column
         field="status"
         width="150"
         title="订单状态"
-      />
+        align="center"
+      >
+        <template v-slot="{ row }">
+          <a-badge status="warning" text="下单中" v-show="row.status=='pay_wating'" />
+          <a-badge status="success" text="下单成功" v-show="row.status=='pay_success'" />
+          <a-badge status="error" text="下单失败" v-show="row.status=='pay_fail'" />
+        </template>
+      </vxe-table-column>
       <vxe-table-column
         field="notifyStatus"
         width="150"
         title="推送订单状态"
-      />
+        align="center"
+      >
+        <template v-slot="{ row }">
+          <a-badge status="warning" text="支付中" v-show="row.notifyStatus=='pay_wating'" />
+          <a-badge status="success" text="支付成功" v-show="row.notifyStatus=='pay_success'" />
+          <a-badge status="default" text="未开始" v-show="row.notifyStatus=='notbegin'" />
+          <a-badge status="error" text="支付失败" v-show="row.notifyStatus=='fail'" />
+        </template>
+      </vxe-table-column>
       <vxe-table-column
         field="created_at"
         width="200"
         :formatter="formatterDate"
         title="订单时间"
+        align="center"
       />
       <vxe-table-column
         title="操作"
         width="200"
         fixed="right"
+        align="center"
       >
         <template v-slot="{ row }">
           <vxe-button @click="verifyOrder(row)" v-show="row.status=='pay_wating'">
@@ -433,6 +460,11 @@ export default {
     formatterDate ({ cellValue }) {
       var d = new Date(cellValue)
       return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+    },
+    formatterNumberOfDay ({ cellValue }) {
+      if (cellValue) {
+        return cellValue / 100
+      }
     },
     selectChannels () {
       // eslint-disable-next-line no-unused-vars

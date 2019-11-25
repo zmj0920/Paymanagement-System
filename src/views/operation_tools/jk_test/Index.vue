@@ -9,7 +9,7 @@
       />
     </p>
     <p>userApiKey:   <a-input type="text" style="width:400px" id="key" v-model="key"/> <a-button @click="copes()">复制密钥</a-button></p>
-    <p>JWT: <a-input type="text" style="width:600px" id="key" v-model="token"/></p>
+    <p>JWT: <a-input type="text" style="width:600px" id="jwt" v-model="token"/><a-button @click="copesjwt()">复制JWT</a-button></p>
     <p>下单地址：{{ url }}</p>
     <p>请求方式: POST 请求Content-Type: application/json </p>
     <p>
@@ -141,6 +141,23 @@ export default {
   methods: {
     copes () {
       const a = document.getElementById('key')
+      a.select()
+      if (document.execCommand('Copy', 'false', null)) {
+      // 如果复制成功
+        this.$message.success(
+          '复制成功',
+          10
+        )
+      } else {
+      // 如果复制失败
+        this.$message.success(
+          '复制失败',
+          10
+        )
+      }
+    },
+    copesjwt () {
+      const a = document.getElementById('jwt')
       a.select()
       if (document.execCommand('Copy', 'false', null)) {
       // 如果复制成功

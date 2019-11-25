@@ -51,38 +51,45 @@
       <vxe-table-column
         type="checkbox"
         width="40"
+        align="center"
       />
       <vxe-table-column
         field="id"
         width="80"
         title="通道组ID"
+        align="center"
       />
       <vxe-table-column
         field="user.username"
         width="150"
         title="所属用户"
         sortable
+        align="center"
       />
       <vxe-table-column
         field="name"
         width="150"
         title="通道组名称"
+        align="center"
       />
       <vxe-table-column
         field="routeRule"
         width="150"
         title="路由规则"
+        align="center"
       />
       <vxe-table-column
         field="isAvailable"
         width="150"
         :formatter="formatterTrue"
         title="是否可用"
+        align="center"
       />
       <vxe-table-column
         title="操作"
         width="200"
         fixed="right"
+        align="center"
       >
         <template v-slot="{ row }">
           <vxe-button @click="handleEdit(row)">
