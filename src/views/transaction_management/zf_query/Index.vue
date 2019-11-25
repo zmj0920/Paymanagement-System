@@ -442,13 +442,13 @@ export default {
         // eslint-disable-next-line no-const-assign
         urls += `id=${this.sousuo.id}`
       } else if (this.sousuo.merchantOrderId !== '') {
-        urls += `merchantOrderId=${this.sousuo.merchantOrderId}`
+        urls += `&merchantOrderId=${this.sousuo.merchantOrderId}`
       } else if (this.sousuo.orderstatus !== '') {
-        urls += `status=${this.sousuo.orderstatus}`
+        urls += `&status=${this.sousuo.orderstatus}`
       } else if (this.sousuo.channelType !== '') {
-        urls += `channelType=${this.sousuo.channelType}`
+        urls += `&channelType=${this.sousuo.channelType}`
       } else if (this.sousuo.transactionType !== '') {
-        urls += `transactionType=${this.sousuo.transactionType}`
+        urls += `&transactionType=${this.sousuo.transactionType}`
       }
       axios({
         url: urls,
