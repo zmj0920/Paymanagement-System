@@ -1,27 +1,79 @@
 <template>
   <div>
     <h3>接口白名单</h3>
-    <a-button type="primary" @click="showModal">添加IP</a-button>
-    <br />
-    <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination" @change="TableChange">
-
-      <template slot="time" slot-scope="text, record">
-        <a-button type="primary" @click="() => Delete(record)">删除</a-button>
-        <a-button type="primary" @click="() => Update(record)">编辑</a-button>
+    <a-button
+      type="primary"
+      @click="showModal"
+    >
+      添加IP
+    </a-button>
+    <br>
+    <a-table
+      :columns="columns"
+      :data-source="data"
+      bordered
+      :pagination="pagination"
+      @change="TableChange"
+    >
+      <template
+        slot="time"
+        slot-scope="text, record"
+      >
+        <a-button
+          type="primary"
+          @click="() => Delete(record)"
+        >
+          删除
+        </a-button>
+        <a-button
+          type="primary"
+          @click="() => Update(record)"
+        >
+          编辑
+        </a-button>
       </template>
-
     </a-table>
-    <a-modal title="添加IP" v-model="visible" @ok="handleOk">
-      <p><label>账号:</label>   <a-input placeholder="请输入账号" style="width: 200px"/> </p>
-      <p><label>IP&nbsp;&nbsp;&nbsp;&nbsp;:</label>  <a-input placeholder="请输入IP" style="width: 200px"/> </p>
-      <p><label>允许接口:</label>  <a-radio-group :options="options" @change="onChange2" v-model="value2" /> </p>
+    <a-modal
+      title="添加IP"
+      v-model="visible"
+      @ok="handleOk"
+    >
+      <p>
+        <label>账号:</label>   <a-input
+          placeholder="请输入账号"
+          style="width: 200px"
+        />
+      </p>
+      <p>
+        <label>IP&nbsp;&nbsp;&nbsp;&nbsp;:</label>  <a-input
+          placeholder="请输入IP"
+          style="width: 200px"
+        />
+      </p>
+      <p>
+        <label>允许接口:</label>  <a-radio-group
+          :options="options"
+          @change="onChange2"
+          v-model="value2"
+        />
+      </p>
       <template slot="footer">
-        <a-button key="back" @click="handleCancel">取消</a-button>
-        <a-button key="submit" type="primary" @click="handleOk">确认</a-button>
+        <a-button
+          key="back"
+          @click="handleCancel"
+        >
+          取消
+        </a-button>
+        <a-button
+          key="submit"
+          type="primary"
+          @click="handleOk"
+        >
+          确认
+        </a-button>
       </template>
     </a-modal>
   </div>
-
 </template>
 <script>
 export default {

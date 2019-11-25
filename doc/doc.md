@@ -55,3 +55,32 @@ qingfeng
 "updated_at": "2019-11-22T14:07:17.000Z"
 }
 }
+
+
+
+http://47.56.180.125/orders/verifyOrder 这个是验单接口，请求参数是 
+
+{
+	"orderId":10
+} 
+
+ orderId代表订单id，只有订单状态=="pay_wating"的时候，才显示按钮。 返回值，状态码200，代表操作正常。
+
+{
+  "isNotify": true,
+  "status": "pay_success"
+}  isNotify：已经通知下游服务器。 status:订单支付成功。
+
+
+
+
+http://47.56.180.125/orders/fixOrder 这个是补单接口，请求参数是
+
+{
+	"orderId":10
+} 
+ 只有订单状态=="pay_wating"的时候，才显示按钮。返回值，状态码200，代表操作正常。
+ 
+ {
+  "isNotify": true
+} isNotify：订单已经修改成完成这支付， 并通知下游服务器。

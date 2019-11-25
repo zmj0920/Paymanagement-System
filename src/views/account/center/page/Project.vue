@@ -1,12 +1,28 @@
 <template>
   <div class="ant-pro-pages-account-projects-cardList">
-    <a-list :loading="loading" :data-source="data" :grid="{ gutter: 24, xxl: 3, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }">
-      <a-list-item slot="renderItem" slot-scope="item">
-        <a-card class="ant-pro-pages-account-projects-card" hoverable>
-          <img slot="cover" :src="item.cover" :alt="item.title" />
+    <a-list
+      :loading="loading"
+      :data-source="data"
+      :grid="{ gutter: 24, xxl: 3, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }"
+    >
+      <a-list-item
+        slot="renderItem"
+        slot-scope="item"
+      >
+        <a-card
+          class="ant-pro-pages-account-projects-card"
+          hoverable
+        >
+          <img
+            slot="cover"
+            :src="item.cover"
+            :alt="item.title"
+          >
           <a-card-meta :title="item.title">
             <template slot="description">
-              <ellipsis :length="50">{{ item.description }}</ellipsis>
+              <ellipsis :length="50">
+                {{ item.description }}
+              </ellipsis>
             </template>
           </a-card-meta>
           <div class="cardItemContent">

@@ -1,11 +1,26 @@
 <template>
   <div>
     <a-row :gutter="24">
-      <a-col :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
-        <a-card title="登录日志" class="project-list" style="margin-bottom: 24px;" :bordered="false">
+      <a-col
+        :xl="16"
+        :lg="24"
+        :md="24"
+        :sm="24"
+        :xs="24"
+      >
+        <a-card
+          title="登录日志"
+          class="project-list"
+          style="margin-bottom: 24px;"
+          :bordered="false"
+        >
           <a slot="extra">全部日志</a>
         </a-card>
-        <a-card style="margin-bottom: 24px" title="操作记录" :bordered="false">
+        <a-card
+          style="margin-bottom: 24px"
+          title="操作记录"
+          :bordered="false"
+        >
           <a slot="extra">全部记录</a>
           <div>操作记录</div>
         </a-card>
@@ -17,7 +32,8 @@
         :lg="24"
         :md="24"
         :sm="24"
-        :xs="24">
+        :xs="24"
+      >
         <a-card
           title="数据维护"
           style="margin-bottom: 24px"
@@ -35,7 +51,13 @@
           <div>站点设置</div>
         </a-card>
       </a-col>
-      <a-col :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
+      <a-col
+        :xl="16"
+        :lg="24"
+        :md="24"
+        :sm="24"
+        :xs="24"
+      >
         <a-card
           class="project-list"
           style="margin-bottom: 24px;"

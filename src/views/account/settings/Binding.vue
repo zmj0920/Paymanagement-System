@@ -1,10 +1,8 @@
 <template>
   <a-list
-    itemLayout="horizontal"
-    :dataSource="data"
-  >
-
-  </a-list>
+    item-layout="horizontal"
+    :data-source="data"
+  />
 </template>
 
 <script>

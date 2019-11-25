@@ -4,7 +4,7 @@
     <a-drawer
       v-if="isMobile()"
       placement="left"
-      :wrapClassName="`drawer-sider ${navTheme}`"
+      :wrap-class-name="`drawer-sider ${navTheme}`"
       :closable="false"
       :visible="collapsed"
       @close="drawerClose"
@@ -16,7 +16,7 @@
         :collapsed="false"
         :collapsible="true"
         @menuSelect="menuSelect"
-      ></side-menu>
+      />
     </a-drawer>
 
     <side-menu
@@ -26,9 +26,12 @@
       :theme="navTheme"
       :collapsed="collapsed"
       :collapsible="true"
-    ></side-menu>
+    />
 
-    <a-layout :class="[layoutMode, `content-width-${contentWidth}`]" :style="{ paddingLeft: contentPaddingLeft, minHeight: '100vh' }">
+    <a-layout
+      :class="[layoutMode, `content-width-${contentWidth}`]"
+      :style="{ paddingLeft: contentPaddingLeft, minHeight: '100vh' }"
+    >
       <!-- layout header -->
       <global-header
         :mode="layoutMode"
@@ -41,7 +44,7 @@
 
       <!-- layout content -->
       <a-layout-content :style="{ height: '100%', margin: '24px 24px 0', paddingTop: fixedHeader ? '64px' : '0' }">
-        <multi-tab v-if="multiTab"></multi-tab>
+        <multi-tab v-if="multiTab" />
         <transition name="page-transition">
           <route-view />
         </transition>
@@ -53,10 +56,9 @@
       </a-layout-footer>
 
       <!-- Setting Drawer (show in development mode) -->
-      <setting-drawer v-if="!production"></setting-drawer>
+      <setting-drawer v-if="!production" />
     </a-layout>
   </a-layout>
-
 </template>
 
 <script>

@@ -1,10 +1,12 @@
 <template>
   <div :class="prefixCls">
     <div style="float: left">
-      <slot name="extra">{{ extra }}</slot>
+      <slot name="extra">
+        {{ extra }}
+      </slot>
     </div>
     <div style="float: right">
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>

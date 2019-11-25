@@ -1,5 +1,9 @@
 <template>
-  <a-card :loading="loading" :body-style="{ padding: '20px 24px 8px' }" :bordered="false">
+  <a-card
+    :loading="loading"
+    :body-style="{ padding: '20px 24px 8px' }"
+    :bordered="false"
+  >
     <div class="chart-card-header">
       <div class="meta">
         <span class="chart-card-title">
@@ -8,7 +12,7 @@
           </slot>
         </span>
         <span class="chart-card-action">
-          <slot name="action"></slot>
+          <slot name="action" />
         </span>
       </div>
       <div class="total">
@@ -19,12 +23,12 @@
     </div>
     <div class="chart-card-content">
       <div class="content-fix">
-        <slot></slot>
+        <slot />
       </div>
     </div>
     <div class="chart-card-footer">
       <div class="field">
-        <slot name="footer"></slot>
+        <slot name="footer" />
       </div>
     </div>
   </a-card>

@@ -1,16 +1,27 @@
 <template>
   <div>
     <h3>登录日志</h3>
-    <a-input-search placeholder="请输入用户账号" style="width: 200px" @search="onSearch" />
-    <br />
-    <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination" @change="TableChange">
-      <template slot="name" slot-scope="text">
+    <a-input-search
+      placeholder="请输入用户账号"
+      style="width: 200px"
+      @search="onSearch"
+    />
+    <br>
+    <a-table
+      :columns="columns"
+      :data-source="data"
+      bordered
+      :pagination="pagination"
+      @change="TableChange"
+    >
+      <template
+        slot="name"
+        slot-scope="text"
+      >
         {{ text }}
       </template>
-
     </a-table>
   </div>
-
 </template>
 <script>
 const columns = [

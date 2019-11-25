@@ -1,10 +1,13 @@
 <template>
   <div :class="[prefixCls, lastCls, blockCls, gridCls]">
-    <div v-if="title" class="antd-pro-components-standard-form-row-index-label">
+    <div
+      v-if="title"
+      class="antd-pro-components-standard-form-row-index-label"
+    >
       <span>{{ title }}</span>
     </div>
     <div class="antd-pro-components-standard-form-row-index-content">
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>

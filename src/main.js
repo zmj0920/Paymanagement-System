@@ -18,7 +18,7 @@ import './components/global.less'
 Vue.use(VXETable)
 
 Vue.config.productionTip = false
-Vue.prototype.$url = 'http://47.56.180.125'
+// Vue.prototype.$url = 'http://47.56.180.125'
 // mount axios Vue.$http and this.$http
 Vue.use(VueAxios)
 

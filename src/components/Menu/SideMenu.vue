@@ -4,7 +4,8 @@
     width="256px"
     :collapsible="collapsible"
     v-model="collapsed"
-    :trigger="null">
+    :trigger="null"
+  >
     <logo />
     <s-menu
       :collapsed="collapsed"
@@ -12,9 +13,9 @@
       :theme="theme"
       :mode="mode"
       @select="onSelect"
-      style="padding: 16px 0px;"></s-menu>
+      style="padding: 16px 0px;"
+    />
   </a-layout-sider>
-
 </template>
 
 <script>

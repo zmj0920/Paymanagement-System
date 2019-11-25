@@ -1,11 +1,17 @@
 <template>
   <div class="chart-mini-progress">
-    <div class="target" :style="{ left: target + '%'}">
+    <div
+      class="target"
+      :style="{ left: target + '%'}"
+    >
       <span :style="{ backgroundColor: color }" />
-      <span :style="{ backgroundColor: color }"/>
+      <span :style="{ backgroundColor: color }" />
     </div>
     <div class="progress-wrapper">
-      <div class="progress" :style="{ backgroundColor: color, width: percentage + '%', height: height }"></div>
+      <div
+        class="progress"
+        :style="{ backgroundColor: color, width: percentage + '%', height: height }"
+      />
     </div>
   </div>
 </template>

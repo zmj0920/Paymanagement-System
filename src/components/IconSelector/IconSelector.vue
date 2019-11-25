@@ -1,10 +1,25 @@
 <template>
   <div :class="prefixCls">
-    <a-tabs v-model="currentTab" @change="handleTabChange">
-      <a-tab-pane v-for="v in icons" :tab="v.title" :key="v.key">
+    <a-tabs
+      v-model="currentTab"
+      @change="handleTabChange"
+    >
+      <a-tab-pane
+        v-for="v in icons"
+        :tab="v.title"
+        :key="v.key"
+      >
         <ul>
-          <li v-for="(icon, key) in v.icons" :key="`${v.key}-${key}`" :class="{ 'active': selectedIcon==icon }" @click="handleSelectedIcon(icon)" >
-            <a-icon :type="icon" :style="{ fontSize: '36px' }" />
+          <li
+            v-for="(icon, key) in v.icons"
+            :key="`${v.key}-${key}`"
+            :class="{ 'active': selectedIcon==icon }"
+            @click="handleSelectedIcon(icon)"
+          >
+            <a-icon
+              :type="icon"
+              :style="{ fontSize: '36px' }"
+            />
           </li>
         </ul>
       </a-tab-pane>

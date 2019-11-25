@@ -1,7 +1,10 @@
 <template>
   <div class="result">
     <div>
-      <a-icon :class="{ 'icon': true, [`${type}`]: true }" :type="localIsSuccess ? 'check-circle' : 'close-circle'"/>
+      <a-icon
+        :class="{ 'icon': true, [`${type}`]: true }"
+        :type="localIsSuccess ? 'check-circle' : 'close-circle'"
+      />
     </div>
     <div class="title">
       <slot name="title">
@@ -13,11 +16,17 @@
         {{ description }}
       </slot>
     </div>
-    <div class="extra" v-if="$slots.default">
-      <slot></slot>
+    <div
+      class="extra"
+      v-if="$slots.default"
+    >
+      <slot />
     </div>
-    <div class="action" v-if="$slots.action">
-      <slot name="action"></slot>
+    <div
+      class="action"
+      v-if="$slots.action"
+    >
+      <slot name="action" />
     </div>
   </div>
 </template>

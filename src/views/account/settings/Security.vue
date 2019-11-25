@@ -1,9 +1,13 @@
 <template>
   <a-list
-    itemLayout="horizontal"
-    :dataSource="data"
+    item-layout="horizontal"
+    :data-source="data"
   >
-    <a-list-item slot="renderItem" slot-scope="item, index" :key="index">
+    <a-list-item
+      slot="renderItem"
+      slot-scope="item, index"
+      :key="index"
+    >
       <a-list-item-meta>
         <a slot="title">{{ item.title }}</a>
         <span slot="description">
@@ -13,9 +17,11 @@
         </span>
       </a-list-item-meta>
       <template v-if="item.actions">
-        <a slot="actions" @click="item.actions.callback">{{ item.actions.title }}</a>
+        <a
+          slot="actions"
+          @click="item.actions.callback"
+        >{{ item.actions.title }}</a>
       </template>
-
     </a-list-item>
   </a-list>
 </template>

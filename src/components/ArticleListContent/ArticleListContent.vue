@@ -6,7 +6,10 @@
       </slot>
     </div>
     <div class="extra">
-      <a-avatar :src="avatar" size="small" />
+      <a-avatar
+        :src="avatar"
+        size="small"
+      />
       <a :href="href">{{ owner }}</a> 发布在 <a :href="href">{{ href }}</a>
       <em>{{ updateAt | moment }}</em>
     </div>

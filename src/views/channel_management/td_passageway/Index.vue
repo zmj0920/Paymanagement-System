@@ -3,51 +3,85 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline">
         <a-row :gutter="48">
-          <a-col :md="7" :sm="24">
+          <a-col
+            :md="7"
+            :sm="24"
+          >
             <a-form-item label="ID名称">
-              <a-input placeholder="ID名称" v-model="sousuo.name" />
+              <a-input
+                placeholder="ID名称"
+                v-model="sousuo.name"
+              />
             </a-form-item>
           </a-col>
-          <a-col :md="7" :sm="24">
+          <a-col
+            :md="7"
+            :sm="24"
+          >
             <a-form-item label="分组">
-              <a-select placeholder="请选择分组" default-value="0">
-                <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">分组111</a-select-option>
-                <a-select-option value="2">运行中</a-select-option>
+              <a-select
+                placeholder="请选择分组"
+                default-value="0"
+              >
+                <a-select-option value="0">
+                  全部
+                </a-select-option>
+                <a-select-option value="1">
+                  分组111
+                </a-select-option>
+                <a-select-option value="2">
+                  运行中
+                </a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
-          <a-col :md="7" :sm="24">
-            <a-form-item label="状态">
-              <a-select placeholder="请选择状态" default-value="0">
-                <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">启用</a-select-option>
-                <a-select-option value="2">关闭</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :md="7" :sm="24">
+          <a-col
+            :md="7"
+            :sm="24"
+          >
             <a-form-item label="渠道类型">
-              <a-select placeholder="请选择渠道类型" >
-                <a-select-option value="alipay">alipay</a-select-option>
-                <a-select-option value="wechat">wechat</a-select-option>
+              <a-select placeholder="请选择渠道类型">
+                <a-select-option value="alipay">
+                  alipay
+                </a-select-option>
+                <a-select-option value="wechat">
+                  wechat
+                </a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
-          <a-col :md="7" :sm="24">
+          <a-col
+            :md="7"
+            :sm="24"
+          >
             <a-form-item label="交易类型">
-              <a-select placeholder="请选择交易类型" >
-                <a-select-option value="h5">h5</a-select-option>
-                <a-select-option value="pc">pc</a-select-option>
-                <a-select-option value="app">app</a-select-option>
+              <a-select placeholder="请选择交易类型">
+                <a-select-option value="h5">
+                  h5
+                </a-select-option>
+                <a-select-option value="pc">
+                  pc
+                </a-select-option>
+                <a-select-option value="app">
+                  app
+                </a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
 
-          <a-col :md="7" :sm="24">
+          <a-col
+            :md="7"
+            :sm="24"
+          >
             <span class="table-page-search-submitButtons">
-              <a-button type="primary" @click="selectChannels()">查询</a-button>
-              <a-button style="margin-left: 8px" @click="()=>visible1 = true">新增</a-button>
+              <a-button
+                type="primary"
+                @click="selectChannels()"
+              >查询</a-button>
+              <a-button
+                style="margin-left: 8px"
+                @click="()=>visible1 = true"
+              >新增</a-button>
             </span>
           </a-col>
         </a-row>
@@ -58,10 +92,6 @@
       export
       :refresh="{query: init}"
     >
-      <!-- <template v-slot:buttons>
-        <vxe-button @click="channelsDelete">删除</vxe-button>
-        <vxe-button @click="handleEdit">编辑</vxe-button>
-      </template> -->
     </vxe-toolbar>
     <vxe-table
       border
@@ -72,23 +102,92 @@
       :loading="loading"
       :start-index="(tablePage.currentPage - 1) * tablePage.pageSize"
       :checkbox-config="{reserve: true}"
-      :data="tableData">
-      <vxe-table-column type="checkbox" width="30"></vxe-table-column>
-      <vxe-table-column field="id" width="80" title="通道ID"></vxe-table-column>
-      <vxe-table-column field="name" width="150" title="通道名称" sortable></vxe-table-column>
-      <vxe-table-column field="channelType" width="150" title="渠道类型"></vxe-table-column>
-      <vxe-table-column field="transactionType" width="150" title="交易类型"></vxe-table-column>
-      <vxe-table-column field="limitedAcmoutOfDay" width="150" title="当天限额"></vxe-table-column>
-      <vxe-table-column field="limitedNumberOfDay" width="150" title="当天限笔"></vxe-table-column>
-      <vxe-table-column field="isRepeatedArrange" :formatter="formatterTrue" width="150" title="是否重新分配"></vxe-table-column>
-      <vxe-table-column field="isAvailable" width="150" :formatter="formatterTrue" title="是否可用"></vxe-table-column>
-      <vxe-table-column field="channelAccount" width="150" title="渠道的账号"></vxe-table-column>
-      <vxe-table-column field="isOnline" width="150" title="是否在线"></vxe-table-column>
-      <vxe-table-column field="channelgroup.name" width="150" title="通道组名称"></vxe-table-column>
-      <vxe-table-column title="操作" width="200" fixed="right">
+      :data="tableData"
+    >
+      <vxe-table-column
+        type="checkbox"
+        width="40"
+      />
+      <vxe-table-column
+        field="id"
+        width="80"
+        title="通道ID"
+      />
+      <vxe-table-column
+        field="name"
+        width="150"
+        title="通道名称"
+        sortable
+      />
+      <vxe-table-column
+        field="channelType"
+        width="150"
+        title="渠道类型"
+      />
+      <vxe-table-column
+        field="transactionType"
+        width="150"
+        title="交易类型"
+      />
+      <vxe-table-column
+        field="limitedAcmoutOfDay"
+        width="150"
+        title="当天限额"
+      />
+      <vxe-table-column
+        field="limitedNumberOfDay"
+        width="150"
+        title="当天限笔"
+      />
+      <vxe-table-column
+        field="isRepeatedArrange"
+        :formatter="formatterTrue"
+        width="150"
+        title="是否重新分配"
+      />
+      <vxe-table-column
+        field="isAvailable"
+        width="150"
+        :formatter="formatterTrue"
+        title="是否可用"
+      />
+      <vxe-table-column
+        field="channelAccount"
+        width="150"
+        title="渠道的账号"
+      />
+      <vxe-table-column
+        field="isOnline"
+        width="150"
+        title="是否在线"
+      />
+      <vxe-table-column
+        field="channelgroup.name"
+        width="150"
+        title="通道组名称"
+      />
+      <vxe-table-column
+        title="操作"
+        width="200"
+        fixed="right"
+      >
         <template v-slot="{ row }">
-          <vxe-button @click="channelsDelete(row)">删除</vxe-button>
-          <vxe-button @click="handleEdit(row)">编辑</vxe-button>
+          <vxe-button @click="handleEdit(row)">
+            编辑
+          </vxe-button>
+          <a-popconfirm
+            title="你是否确认删除?"
+            @confirm="channelsDelete(row)"
+            @cancel="cancel"
+            okText="Yes"
+            cancelText="No"
+          >
+            <!-- @click="channelsDelete(row)" -->
+            <vxe-button >
+              删除
+            </vxe-button>
+          </a-popconfirm>
+
         </template>
       </vxe-table-column>
     </vxe-table>
@@ -99,34 +198,92 @@
       :page-size="tablePage.pageSize"
       :total="tablePage.total"
       :layouts="['PrevPage', 'JumpNumber', 'NextPage', 'FullJump', 'Sizes', 'Total']"
-      @page-change="handlePageChange">
-    </vxe-pager>
+      @page-change="handlePageChange"
+    />
     <a-modal
       title="编辑"
       v-model="visible"
       class="model-item"
       :footer="null"
     >
-      <p><label>通道名称:</label> <a-input placeholder="通道名称" v-model="mdl.name" style="width: 200px"/></p>
-      <p><label>渠道类型:</label>
-        <a-select placeholder="请选择渠道类型" style="width: 200px" v-model="mdl.channelType" >
-          <a-select-option value="apilay">apilay</a-select-option>
-          <a-select-option value="wechat">wechat</a-select-option>
+      <p>
+        <label>通道名称:</label> <a-input
+          placeholder="通道名称"
+          v-model="mdl.name"
+          style="width: 200px"
+        />
+      </p>
+      <p>
+        <label>渠道类型:</label>
+        <a-select
+          placeholder="请选择渠道类型"
+          style="width: 200px"
+          v-model="mdl.channelType"
+        >
+          <a-select-option value="apilay">
+            apilay
+          </a-select-option>
+          <a-select-option value="wechat">
+            wechat
+          </a-select-option>
         </a-select>
       </p>
-      <p><label>交易类型:</label>
-        <a-select placeholder="请选择交易类型" style="width: 200px" v-model="mdl.transactionType" >
-          <a-select-option value="h5">h5</a-select-option>
-          <a-select-option value="pc">pc</a-select-option>
-          <a-select-option value="app">app</a-select-option>
+      <p>
+        <label>交易类型:</label>
+        <a-select
+          placeholder="请选择交易类型"
+          style="width: 200px"
+          v-model="mdl.transactionType"
+        >
+          <a-select-option value="h5">
+            h5
+          </a-select-option>
+          <a-select-option value="pc">
+            pc
+          </a-select-option>
+          <a-select-option value="app">
+            app
+          </a-select-option>
         </a-select>
       </p>
-      <p><label>当天限额:</label><a-input placeholder="当天限额" style="width: 200px" v-model="mdl.limitedAcmoutOfDay" /></p>
-      <p><label>当天限笔:</label><a-input placeholder="当天限笔" style="width: 200px" v-model="mdl.limitedNumberOfDay" /></p>
-      <p><label>渠道的账号:</label><a-input placeholder="渠道的账号" style="width: 200px" v-model="mdl.channelAccount" /></p>
-      <p><a-checkbox v-model="mdl.isRepeatedArrange">是否重新分配</a-checkbox></p>
-      <p><a-checkbox v-model="mdl.isAvailable">是否可用</a-checkbox></p>
-      <a-button type="primary" style="width: 200px" @click="updateChannel()">保存</a-button>
+      <p>
+        <label>当天限额:</label><a-input
+          placeholder="当天限额"
+          style="width: 200px"
+          v-model="mdl.limitedAcmoutOfDay"
+        />
+      </p>
+      <p>
+        <label>当天限笔:</label><a-input
+          placeholder="当天限笔"
+          style="width: 200px"
+          v-model="mdl.limitedNumberOfDay"
+        />
+      </p>
+      <p>
+        <label>渠道的账号:</label><a-input
+          placeholder="渠道的账号"
+          style="width: 200px"
+          v-model="mdl.channelAccount"
+        />
+      </p>
+      <p>
+        <a-checkbox v-model="mdl.isRepeatedArrange">
+          是否重新分配
+        </a-checkbox>
+      </p>
+      <p>
+        <a-checkbox v-model="mdl.isAvailable">
+          是否可用
+        </a-checkbox>
+      </p>
+      <a-button
+        type="primary"
+        style="width: 200px"
+        @click="updateChannel()"
+      >
+        保存
+      </a-button>
       </a-form>
     </a-modal>
 
@@ -136,26 +293,84 @@
       class="model-item"
       :footer="null"
     >
-      <p><label>通道名称:</label> <a-input placeholder="通道名称" v-model="mdl1.name" style="width: 200px"/></p>
-      <p><label>渠道类型:</label>
-        <a-select placeholder="请选择渠道类型" style="width: 200px" v-model="mdl1.channelType" >
-          <a-select-option value="apilay">apilay</a-select-option>
-          <a-select-option value="wechat">wechat</a-select-option>
+      <p>
+        <label>通道名称:</label> <a-input
+          placeholder="通道名称"
+          v-model="mdl1.name"
+          style="width: 200px"
+        />
+      </p>
+      <p>
+        <label>渠道类型:</label>
+        <a-select
+          placeholder="请选择渠道类型"
+          style="width: 200px"
+          v-model="mdl1.channelType"
+        >
+          <a-select-option value="apilay">
+            apilay
+          </a-select-option>
+          <a-select-option value="wechat">
+            wechat
+          </a-select-option>
         </a-select>
       </p>
-      <p><label>交易类型:</label>
-        <a-select placeholder="请选择交易类型" style="width: 200px" v-model="mdl1.transactionType" >
-          <a-select-option value="h5">h5</a-select-option>
-          <a-select-option value="pc">pc</a-select-option>
-          <a-select-option value="app">app</a-select-option>
+      <p>
+        <label>交易类型:</label>
+        <a-select
+          placeholder="请选择交易类型"
+          style="width: 200px"
+          v-model="mdl1.transactionType"
+        >
+          <a-select-option value="h5">
+            h5
+          </a-select-option>
+          <a-select-option value="pc">
+            pc
+          </a-select-option>
+          <a-select-option value="app">
+            app
+          </a-select-option>
         </a-select>
       </p>
-      <p><label>当天限额:</label><a-input placeholder="当天限额" style="width: 200px" v-model="mdl1.limitedAcmoutOfDay" /></p>
-      <p><label>当天限笔:</label><a-input placeholder="当天限笔" style="width: 200px" v-model="mdl1.limitedNumberOfDay" /></p>
-      <p><label>渠道的账号:</label><a-input placeholder="渠道的账号" style="width: 200px" v-model="mdl1.channelAccount" /></p>
-      <p><a-checkbox v-model="mdl1.isRepeatedArrange">是否重新分配</a-checkbox></p>
-      <p><a-checkbox v-model="mdl1.isAvailable">是否可用</a-checkbox></p>
-      <a-button type="primary" style="width: 200px" @click="addChannels()">保存</a-button>
+      <p>
+        <label>当天限额:</label><a-input
+          placeholder="当天限额"
+          style="width: 200px"
+          v-model="mdl1.limitedAcmoutOfDay"
+        />
+      </p>
+      <p>
+        <label>当天限笔:</label><a-input
+          placeholder="当天限笔"
+          style="width: 200px"
+          v-model="mdl1.limitedNumberOfDay"
+        />
+      </p>
+      <p>
+        <label>渠道的账号:</label><a-input
+          placeholder="渠道的账号"
+          style="width: 200px"
+          v-model="mdl1.channelAccount"
+        />
+      </p>
+      <p>
+        <a-checkbox v-model="mdl1.isRepeatedArrange">
+          是否重新分配
+        </a-checkbox>
+      </p>
+      <p>
+        <a-checkbox v-model="mdl1.isAvailable">
+          是否可用
+        </a-checkbox>
+      </p>
+      <a-button
+        type="primary"
+        style="width: 200px"
+        @click="addChannels()"
+      >
+        保存
+      </a-button>
       </a-form>
     </a-modal>
   </div>
@@ -195,6 +410,9 @@ export default {
     }
   },
   methods: {
+    cancel (e) {
+      this.$message.error('已取消')
+    },
     formatterTrue ({ cellValue }) {
       if (cellValue === true) {
         return '是'
@@ -255,9 +473,17 @@ export default {
                 message: '修改成功'
               })
             }, 1000)
+          } else {
+            this.$notification.error({
+              message: '修改失败'
+            })
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          this.$notification.error({
+            message: err.message
+          })
+        })
     },
     addChannels () {
       axios({
@@ -289,9 +515,17 @@ export default {
                 message: '添加成功'
               })
             }, 1000)
+          } else {
+            this.$notification.error({
+              message: '添加失败'
+            })
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          this.$notification.error({
+            message: err.message
+          })
+        })
     },
     handleEdit (row) {
       this.mdl = Object.assign({}, row)
@@ -315,9 +549,17 @@ export default {
                 message: '删除成功'
               })
             }, 1000)
+          } else {
+            this.$notification.error({
+              message: '删除失败'
+            })
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          this.$notification.error({
+            message: err.message
+          })
+        })
     },
     handlePageChange ({ currentPage, pageSize }) {
       this.tablePage.currentPage = currentPage

@@ -1,8 +1,22 @@
 <template>
-  <v-chart :width="width" :height="height" :padding="[0]" :data="data" :scale="scale">
+  <v-chart
+    :width="width"
+    :height="height"
+    :padding="[0]"
+    :data="data"
+    :scale="scale"
+  >
     <v-tooltip :show-title="false" />
-    <v-coord type="rect" direction="TL" />
-    <v-point position="x*y" color="category" shape="cloud" tooltip="value*category" />
+    <v-coord
+      type="rect"
+      direction="TL"
+    />
+    <v-point
+      position="x*y"
+      color="category"
+      shape="cloud"
+      tooltip="value*category"
+    />
   </v-chart>
 </template>
 

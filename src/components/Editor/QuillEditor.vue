@@ -7,9 +7,8 @@
       @blur="onEditorBlur($event)"
       @focus="onEditorFocus($event)"
       @ready="onEditorReady($event)"
-      @change="onEditorChange($event)">
-    </quill-editor>
-
+      @change="onEditorChange($event)"
+    />
   </div>
 </template>
 
