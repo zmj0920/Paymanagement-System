@@ -18,28 +18,19 @@
             :md="7"
             :sm="24"
           >
-            <a-form-item label="商户订单号">
-              <a-input
-                placeholder="商户订单号"
-                v-model="sousuo.name"
-              />
-            </a-form-item>
-          </a-col>
-
-          <a-col
-            :md="7"
-            :sm="24"
-          >
-            <a-form-item label="选择订单状态">
-              <a-select placeholder="选择订单状态">
-                <a-select-option value="pay_wating">
-                  pay_wating
+            <a-form-item label="分组">
+              <a-select
+                placeholder="请选择分组"
+                default-value="0"
+              >
+                <a-select-option value="0">
+                  全部
                 </a-select-option>
-                <a-select-option value="pay_success">
-                  pay_success
+                <a-select-option value="1">
+                  分组111
                 </a-select-option>
-                <a-select-option value="pay_fail">
-                  pay_fail
+                <a-select-option value="2">
+                  运行中
                 </a-select-option>
               </a-select>
             </a-form-item>
@@ -77,14 +68,6 @@
               </a-select>
             </a-form-item>
           </a-col>
-          <a-col
-            :md="7"
-            :sm="24"
-          >
-            <a-form-item label="">
-              <a-range-picker />
-            </a-form-item>
-          </a-col>
 
           <a-col
             :md="7"
@@ -95,7 +78,10 @@
                 type="primary"
                 @click="selectChannels()"
               >查询</a-button>
-              <!-- <a-button style="margin-left: 8px" @click="()=>visible1 = true">新增</a-button> -->
+              <a-button
+                style="margin-left: 8px"
+                @click="()=>visible1 = true"
+              >新增</a-button>
             </span>
           </a-col>
         </a-row>
@@ -106,10 +92,6 @@
       export
       :refresh="{query: init}"
     >
-      <!-- <template v-slot:buttons>
-        <vxe-button @click="channelsDelete">删除</vxe-button>
-        <vxe-button @click="handleEdit">编辑</vxe-button>
-      </template> -->
     </vxe-toolbar>
     <vxe-table
       border
@@ -124,22 +106,17 @@
     >
       <vxe-table-column
         type="checkbox"
-        width="30"
+        width="40"
       />
       <vxe-table-column
         field="id"
         width="80"
-        title="订单ID"
+        title="通道ID"
       />
       <vxe-table-column
-        field="merchantOrderId"
-        width="250"
-        title="商户订单号"
-      />
-      <vxe-table-column
-        field="user.username"
+        field="name"
         width="150"
-        title="所属用户"
+        title="通道名称"
         sortable
       />
       <vxe-table-column
@@ -153,30 +130,41 @@
         title="交易类型"
       />
       <vxe-table-column
-        field="amount"
+        field="limitedAcmoutOfDay"
         width="150"
-        title="交易金额(单位 分)"
+        title="当天限额"
       />
       <vxe-table-column
-        field="fee"
+        field="limitedNumberOfDay"
         width="150"
-        title="交易手续费"
+        title="当天限笔"
       />
       <vxe-table-column
-        field="status"
+        field="isRepeatedArrange"
+        :formatter="formatterTrue"
         width="150"
-        title="订单状态"
+        title="是否重新分配"
       />
       <vxe-table-column
-        field="notifyStatus"
+        field="isAvailable"
         width="150"
-        title="推送订单状态"
+        :formatter="formatterTrue"
+        title="是否可用"
       />
       <vxe-table-column
-        field="created_at"
-        width="200"
-        :formatter="formatterDate"
-        title="订单时间"
+        field="channelAccount"
+        width="150"
+        title="渠道的账号"
+      />
+      <vxe-table-column
+        field="isOnline"
+        width="150"
+        title="是否在线"
+      />
+      <vxe-table-column
+        field="channelgroup.name"
+        width="150"
+        title="通道组名称"
       />
       <vxe-table-column
         title="操作"
@@ -184,12 +172,22 @@
         fixed="right"
       >
         <template v-slot="{ row }">
-          <vxe-button @click="verifyOrder(row)" v-show="row.status=='pay_wating'">
-            验单
+          <vxe-button @click="handleEdit(row)">
+            编辑
           </vxe-button>
-          <vxe-button @click="fixOrder(row)" v-show="row.status=='pay_wating'">
-            补单
-          </vxe-button>
+          <a-popconfirm
+            title="你是否确认删除?"
+            @confirm="channelsDelete(row)"
+            @cancel="cancel"
+            okText="Yes"
+            cancelText="No"
+          >
+            <!-- @click="channelsDelete(row)" -->
+            <vxe-button >
+              删除
+            </vxe-button>
+          </a-popconfirm>
+
         </template>
       </vxe-table-column>
     </vxe-table>
@@ -206,7 +204,15 @@
       title="编辑"
       v-model="visible"
       class="model-item"
+      :footer="null"
     >
+      <p>
+        <label>通道名称:</label> <a-input
+          placeholder="通道名称"
+          v-model="mdl.name"
+          style="width: 200px"
+        />
+      </p>
       <p>
         <label>渠道类型:</label>
         <a-select
@@ -241,61 +247,39 @@
         </a-select>
       </p>
       <p>
-        <label>交易金额(单位 分):</label> <a-input
-          placeholder="交易金额(单位 分)"
-          v-model="mdl.amount"
+        <label>当天限额:</label><a-input
+          placeholder="当天限额"
           style="width: 200px"
+          v-model="mdl.limitedAcmoutOfDay"
         />
       </p>
       <p>
-        <label>交易手续费:</label><a-input
-          placeholder="交易手续费"
+        <label>当天限笔:</label><a-input
+          placeholder="当天限笔"
           style="width: 200px"
-          v-model="mdl.fee"
+          v-model="mdl.limitedNumberOfDay"
         />
       </p>
       <p>
-        <label>订单状态:</label>
-        <a-select
-          placeholder="请选择订单状态"
+        <label>渠道的账号:</label><a-input
+          placeholder="渠道的账号"
           style="width: 200px"
-          v-model="mdl.status"
-        >
-          <a-select-option value="pay_wating">
-            pay_wating
-          </a-select-option>
-          <a-select-option value="pay_success">
-            pay_success
-          </a-select-option>
-          <a-select-option value="pay_fail">
-            pay_fail
-          </a-select-option>
-        </a-select>
+          v-model="mdl.channelAccount"
+        />
       </p>
-
       <p>
-        <label>推送订单状态:</label>
-        <a-select
-          placeholder="推送订单状态"
-          style="width: 200px"
-          v-model="mdl.notifyStatus"
-        >
-          <a-select-option value="pay_wating">
-            notbegin
-          </a-select-option>
-          <a-select-option value="pay_success">
-            waiting
-          </a-select-option>
-          <a-select-option value="pay_fail">
-            success
-          </a-select-option>
-          <a-select-option value="pay_fail">
-            fail
-          </a-select-option>
-        </a-select>
+        <a-checkbox v-model="mdl.isRepeatedArrange">
+          是否重新分配
+        </a-checkbox>
+      </p>
+      <p>
+        <a-checkbox v-model="mdl.isAvailable">
+          是否可用
+        </a-checkbox>
       </p>
       <a-button
         type="primary"
+        style="width: 200px"
         @click="updateChannel()"
       >
         保存
@@ -307,6 +291,7 @@
       title="添加"
       v-model="visible1"
       class="model-item"
+      :footer="null"
     >
       <p>
         <label>通道名称:</label> <a-input
@@ -381,6 +366,7 @@
       </p>
       <a-button
         type="primary"
+        style="width: 200px"
         @click="addChannels()"
       >
         保存
@@ -424,13 +410,19 @@ export default {
     }
   },
   methods: {
-    formatterDate ({ cellValue }) {
-      var d = new Date(cellValue)
-      return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+    cancel (e) {
+      this.$message.error('已取消')
+    },
+    formatterTrue ({ cellValue }) {
+      if (cellValue === true) {
+        return '是'
+      } else {
+        return '否'
+      }
     },
     selectChannels () {
       // eslint-disable-next-line no-unused-vars
-      var urls = `${servicePath.orders}?`
+      var urls = `${servicePath.channels}?`
 
       if (this.sousuo.name !== '') {
         // eslint-disable-next-line no-const-assign
@@ -453,19 +445,22 @@ export default {
     },
     updateChannel () {
       axios({
-        url: `${servicePath.updateOrders}/${this.mdl.id}`,
+        url: `${servicePath.updateChannel}/${this.mdl.id}`,
         method: 'put',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.$store.getters.token}`
         },
         data: {
+          'name': this.mdl.name,
           'channelType': this.mdl.channelType,
           'transactionType': this.mdl.transactionType,
-          'amount': this.mdl.amount,
-          'fee': this.mdl.fee,
-          'status': this.mdl.status,
-          'notifyStatus': this.mdl.notifyStatus
+          'limitedAcmoutOfDay': this.mdl.limitedAcmoutOfDay,
+          'limitedNumberOfDay': this.mdl.limitedNumberOfDay,
+          'isRepeatedArrange': this.mdl.isRepeatedArrange,
+          'isAvailable': this.mdl.isAvailable,
+          'channelgroup': 1,
+          'channelAccount': this.mdl.channelAccount
         }
       })
         .then(res => {
@@ -478,13 +473,21 @@ export default {
                 message: '修改成功'
               })
             }, 1000)
+          } else {
+            this.$notification.error({
+              message: '修改失败'
+            })
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          this.$notification.error({
+            message: err.message
+          })
+        })
     },
     addChannels () {
       axios({
-        url: servicePath.addOrders,
+        url: servicePath.addChannel,
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -512,21 +515,29 @@ export default {
                 message: '添加成功'
               })
             }, 1000)
+          } else {
+            this.$notification.error({
+              message: '添加失败'
+            })
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          this.$notification.error({
+            message: err.message
+          })
+        })
     },
-    // 补单
-    fixOrder (row) {
+    handleEdit (row) {
+      this.mdl = Object.assign({}, row)
+      this.visible = true
+    },
+    channelsDelete (row) {
       axios({
-        url: `${servicePath.fixOrder}`,
-        method: 'post',
+        url: `${servicePath.channelsDelete}/${row.id}`,
+        method: 'delete',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.$store.getters.token}`
-        },
-        data: {
-          'orderId': row.id
         }
       })
         .then(res => {
@@ -535,52 +546,18 @@ export default {
             this.init()
             setTimeout(() => {
               this.$notification.success({
-                message: '补单成功'
+                message: '删除成功'
               })
-            }, 100)
+            }, 1000)
           } else {
             this.$notification.error({
-              message: res.message
+              message: '删除失败'
             })
           }
         })
         .catch(err => {
           this.$notification.error({
-            message: JSON.stringify(err.message)
-          })
-        })
-    },
-    // 验单
-    verifyOrder (row) {
-      axios({
-        url: `${servicePath.verifyOrder}`,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.$store.getters.token}`
-        },
-        data: {
-          'orderId': row.id
-        }
-      })
-        .then(res => {
-          if (res.status === 200) {
-            this.init()
-            setTimeout(() => {
-              this.$notification.success({
-                message: '验单成功'
-              })
-            }, 100)
-          } else {
-            this.$notification.error({
-              message: res.message
-            })
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          this.$notification.error({
-            message: JSON.stringify(err.message)
+            message: err.message
           })
         })
     },
@@ -591,7 +568,7 @@ export default {
     },
     init () {
       axios({
-        url: `${servicePath.orders}?_start=${(this.tablePage.currentPage - 1) * this.tablePage.pageSize}&_limit=${this.tablePage.pageSize}`,
+        url: `${servicePath.channels}?_start=${(this.tablePage.currentPage - 1) * this.tablePage.pageSize}&_limit=${this.tablePage.pageSize}`,
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
@@ -606,7 +583,7 @@ export default {
         .catch(err => console.log(err))
       // 查询条数
       axios({
-        url: servicePath.ordersCount,
+        url: servicePath.channelsCount,
         method: 'get',
         headers: {
           'Content-Type': 'application/json',

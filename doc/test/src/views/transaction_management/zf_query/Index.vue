@@ -124,7 +124,7 @@
     >
       <vxe-table-column
         type="checkbox"
-        width="30"
+        width="40"
       />
       <vxe-table-column
         field="id"

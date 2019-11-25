@@ -1,30 +1,5 @@
 <template>
   <div>
-    接口调试
-    {{ this.$store.getters.userInfo }}
-  </div>
-</template>
-
-<script>
-export default {
-  data () {
-    return {
-    }
-  },
-  methods: {
-
-  },
-  mounted () {
-    console.log(this.$store.getters.userInfo)
-  }
-}
-</script>
-
-<style scoped>
-/* @import 'ant-design-vue/lib/style/themes/default.less'; */
-</style>
-<template>
-  <div>
     接口调试说明
     <p>
       第一步填写异步地址：
@@ -33,7 +8,7 @@ export default {
         style="width:200px"
       />
     </p>
-    <p>userApiKey:{{ this.$store.getters.userInfo.apikey }}</p>
+    <p>userApiKey:   <a-input type="text" style="width:400px" id="key" v-model="key"/> <a-button @click="copes()">复制密钥</a-button></p>
 
     <p>下单地址：{{ url }}</p>
     <p>请求方式: POST 请求Content-Type: application/json </p>
@@ -80,8 +55,8 @@ export default {
             <li>◆ 参数名ASCII码从小到大排序（字典序）； </li>
             <li>◆ 如果参数的值为空不参与签名； </li>
             <li>◆ 参数名区分大小写； </li>
-            <li>◆ 验证调用返回或微信主动通知签名时，传送的sign参数不参与签名，将生成的签名与该sign值作校验。 </li>
-            <li>◆ 微信接口可能增加字段，验证签名时必须支持增加的扩展字段 </li>
+            <li>◆ 验证调用返回主动通知签名时，传送的sign参数不参与签名，将生成的签名与该sign值作校验。 </li>
+            <li>◆ 接口可能增加字段，验证签名时必须支持增加的扩展字段 </li>
           </ol>
           <p>
             第二步，在stringA最后拼接上key得到stringSignTemp字符串，并对stringSignTemp进行MD5运算，
@@ -158,15 +133,33 @@ export default {
 export default {
   data () {
     return {
-      url: ''
+      url: '',
+      key: ''
     }
   },
   methods: {
-
+    copes () {
+      const a = document.getElementById('key')
+      a.select()
+      if (document.execCommand('Copy', 'false', null)) {
+      // 如果复制成功
+        this.$message.success(
+          '复制成功',
+          10
+        )
+      } else {
+      // 如果复制失败
+        this.$message.success(
+          '复制失败',
+          10
+        )
+      }
+    }
   },
   mounted () {
     this.url = window.location.origin + '/orders/unifiedorder'
     console.log(this.$store.getters.userInfo)
+    this.key = this.$store.getters.userInfo.apikey
   }
 }
 </script>
