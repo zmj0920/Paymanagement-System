@@ -234,7 +234,7 @@
         <a-select
           placeholder="请选择通道组"
           style="width: 200px"
-          v-model="mdl.channelgroup.id"
+          v-model="mdlchannelGroupId"
         >
           <a-select-option v-for="item in channelGroup" :value="item.id" :key="item.id">
             {{ item.name }}
@@ -408,6 +408,7 @@ export default {
   data () {
     return {
       mdl: {},
+      mdlchannelGroupId: null,
       visible: false,
       visible1: false,
       channelGroup: [],
@@ -423,7 +424,8 @@ export default {
         'isRepeatedArrange': true,
         'isAvailable': true,
         'channelgroup': '请选择',
-        'channelAccount': 'test' },
+        'channelAccount': 'test'
+      },
       loading: false,
       tablePage: {
         total: 0,
@@ -501,7 +503,7 @@ export default {
           'limitedNumberOfDay': this.mdl.limitedNumberOfDay,
           'isRepeatedArrange': this.mdl.isRepeatedArrange,
           'isAvailable': this.mdl.isAvailable,
-          'channelgroup': this.mdl.channelgroup.id,
+          'channelgroup': this.mdlchannelGroupId,
           'channelAccount': this.mdl.channelAccount
         }
       })
@@ -570,7 +572,8 @@ export default {
         })
     },
     handleEdit (row) {
-      this.mdl = Object.assign({}, row)
+      this.mdl = row
+      this.mdlchannelGroupId = row.channelgroup.id
       this.visible = true
     },
     channelsDelete (row) {
