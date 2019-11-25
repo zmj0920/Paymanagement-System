@@ -10,7 +10,7 @@
             <a-form-item label="ID名称">
               <a-input
                 placeholder="ID名称"
-                v-model="sousuo.name"
+                v-model="sousuo.id"
               />
             </a-form-item>
           </a-col>
@@ -21,7 +21,7 @@
             <a-form-item label="商户订单号">
               <a-input
                 placeholder="商户订单号"
-                v-model="sousuo.name"
+                v-model="sousuo.merchantOrderId"
               />
             </a-form-item>
           </a-col>
@@ -31,7 +31,7 @@
             :sm="24"
           >
             <a-form-item label="选择订单状态">
-              <a-select placeholder="选择订单状态">
+              <a-select placeholder="选择订单状态" v-model="sousuo.orderstatus">
                 <a-select-option value="pay_wating">
                   pay_wating
                 </a-select-option>
@@ -48,7 +48,7 @@
             :md="7"
             :sm="24"
           >
-            <a-form-item label="渠道类型">
+            <a-form-item label="渠道类型" v-model="sousuo.channelType">
               <a-select placeholder="请选择渠道类型">
                 <a-select-option value="alipay">
                   alipay
@@ -63,7 +63,7 @@
             :md="7"
             :sm="24"
           >
-            <a-form-item label="交易类型">
+            <a-form-item label="交易类型" v-model="sousuo.transactionType">
               <a-select placeholder="请选择交易类型">
                 <a-select-option value="h5">
                   h5
@@ -124,17 +124,19 @@
     >
       <vxe-table-column
         type="checkbox"
-        width="30"
+        width="40"
       />
       <vxe-table-column
         field="id"
         width="80"
         title="订单ID"
+        sortable
       />
       <vxe-table-column
         field="merchantOrderId"
-        width="250"
+        width="320"
         title="商户订单号"
+        sortable
       />
       <vxe-table-column
         field="user.username"
@@ -400,7 +402,11 @@ export default {
       visible: false,
       visible1: false,
       sousuo: {
-        name: ''
+        id: '',
+        merchantOrderId: '',
+        orderstatus: '',
+        channelType: '',
+        transactionType: ''
       },
       mdl1: {
         'name': '通道1frompost',
@@ -432,9 +438,17 @@ export default {
       // eslint-disable-next-line no-unused-vars
       var urls = `${servicePath.orders}?`
 
-      if (this.sousuo.name !== '') {
+      if (this.sousuo.id !== '') {
         // eslint-disable-next-line no-const-assign
-        urls += `name=${this.sousuo.name}`
+        urls += `id=${this.sousuo.id}`
+      } else if (this.sousuo.merchantOrderId !== '') {
+        urls += `merchantOrderId=${this.sousuo.merchantOrderId}`
+      } else if (this.sousuo.orderstatus !== '') {
+        urls += `status=${this.sousuo.orderstatus}`
+      } else if (this.sousuo.channelType !== '') {
+        urls += `channelType=${this.sousuo.channelType}`
+      } else if (this.sousuo.transactionType !== '') {
+        urls += `transactionType=${this.sousuo.transactionType}`
       }
       axios({
         url: urls,
@@ -591,7 +605,7 @@ export default {
     },
     init () {
       axios({
-        url: `${servicePath.orders}?_start=${(this.tablePage.currentPage - 1) * this.tablePage.pageSize}&_limit=${this.tablePage.pageSize}`,
+        url: `${servicePath.orders}?_start=${(this.tablePage.currentPage - 1) * this.tablePage.pageSize}&_limit=${this.tablePage.pageSize}&_sort=merchantOrderId`,
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
