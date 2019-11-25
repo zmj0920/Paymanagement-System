@@ -9,7 +9,7 @@
       />
     </p>
     <p>userApiKey:   <a-input type="text" style="width:400px" id="key" v-model="key"/> <a-button @click="copes()">复制密钥</a-button></p>
-
+    <p>JWT: <a-input type="text" style="width:600px" id="key" v-model="token"/></p>
     <p>下单地址：{{ url }}</p>
     <p>请求方式: POST 请求Content-Type: application/json </p>
     <p>
@@ -134,7 +134,8 @@ export default {
   data () {
     return {
       url: '',
-      key: ''
+      key: '',
+      token: ''
     }
   },
   methods: {
@@ -160,6 +161,7 @@ export default {
     this.url = window.location.origin + '/orders/unifiedorder'
     console.log(this.$store.getters.userInfo)
     this.key = this.$store.getters.userInfo.apikey
+    this.token = this.$store.getters.token
   }
 }
 </script>

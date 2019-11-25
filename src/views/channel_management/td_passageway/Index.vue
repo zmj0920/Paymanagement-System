@@ -108,69 +108,92 @@
       <vxe-table-column
         type="checkbox"
         width="40"
+        align="center"
       />
       <vxe-table-column
         field="id"
         width="80"
         title="通道ID"
+        align="center"
       />
       <vxe-table-column
         field="name"
         width="150"
         title="通道名称"
         sortable
+        align="center"
       />
       <vxe-table-column
         field="channelType"
         width="150"
         title="渠道类型"
+        align="center"
       />
       <vxe-table-column
         field="transactionType"
         width="150"
         title="交易类型"
+        align="center"
       />
       <vxe-table-column
         field="limitedAcmoutOfDay"
         width="150"
-        title="当天限额"
+        :formatter="formatterNumberOfDay"
+        title="当天限额(元/分)"
+        align="center"
       />
       <vxe-table-column
         field="limitedNumberOfDay"
         width="150"
-        title="当天限笔"
+        title="当天限笔(元/分)"
+        :formatter="formatterNumberOfDay"
+        align="center"
       />
       <vxe-table-column
         field="isRepeatedArrange"
         :formatter="formatterTrue"
         width="150"
         title="是否重新分配"
+        align="center"
       />
       <vxe-table-column
         field="isAvailable"
         width="150"
-        :formatter="formatterTrue"
         title="是否可用"
-      />
+        align="center"
+      >
+        <template v-slot="{ row }">
+          <a-switch v-model="row.isAvailable"/>
+        </template>
+      </vxe-table-column>
       <vxe-table-column
         field="channelAccount"
         width="150"
         title="渠道的账号"
+        align="center"
       />
       <vxe-table-column
         field="isOnline"
         width="150"
         title="是否在线"
-      />
+        align="center"
+        :formatter="formatterBadge"
+      >
+        <template v-slot="{ row }">
+          <a-badge status="default" v-model="row.isOnline" />
+        </template>
+      </vxe-table-column>
       <vxe-table-column
         field="channelgroup.name"
         width="150"
         title="通道组名称"
+        align="center"
       />
       <vxe-table-column
         title="操作"
         width="200"
         fixed="right"
+        align="center"
       >
         <template v-slot="{ row }">
           <vxe-button @click="handleEdit(row)">
@@ -457,9 +480,14 @@ export default {
     cancel (e) {
       this.$message.error('已取消')
     },
+    formatterNumberOfDay ({ cellValue }) {
+      if (cellValue) {
+        return cellValue / 100
+      }
+    },
     formatterTrue ({ cellValue }) {
       if (cellValue === true) {
-        return '是'
+        return ''
       } else {
         return '否'
       }
@@ -659,5 +687,6 @@ export default {
 }
 .model-item{
   text-align: center;
+
 }
 </style>
