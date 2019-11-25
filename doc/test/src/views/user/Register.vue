@@ -264,7 +264,6 @@ export default {
     },
 
     handleSubmit () {
-      debugger
       const { form: { validateFields }, state, $router } = this
       validateFields({ force: true }, (err, values) => {
         if (!err) {

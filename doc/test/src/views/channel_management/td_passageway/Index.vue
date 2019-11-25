@@ -172,6 +172,9 @@
         fixed="right"
       >
         <template v-slot="{ row }">
+          <vxe-button @click="handleEdit(row)">
+            编辑
+          </vxe-button>
           <a-popconfirm
             title="你是否确认删除?"
             @confirm="channelsDelete(row)"
@@ -185,9 +188,6 @@
             </vxe-button>
           </a-popconfirm>
 
-          <vxe-button @click="handleEdit(row)">
-            编辑
-          </vxe-button>
         </template>
       </vxe-table-column>
     </vxe-table>
