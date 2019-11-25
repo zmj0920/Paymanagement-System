@@ -1,3 +1,4 @@
+/* eslint-disable vue/valid-v-for */
 <template>
   <div>
     <div class="table-page-search-wrapper">
@@ -229,6 +230,18 @@
         </a-select>
       </p>
       <p>
+        <label>通道组:</label>
+        <a-select
+          placeholder="请选择通道组"
+          style="width: 200px"
+          v-model="mdl.channelgroup.id"
+        >
+          <a-select-option v-for="item in channelGroup" :value="item.id" :key="item.id">
+            {{ item.name }}
+          </a-select-option>
+        </a-select>
+      </p>
+      <p>
         <label>交易类型:</label>
         <a-select
           placeholder="请选择交易类型"
@@ -316,6 +329,18 @@
         </a-select>
       </p>
       <p>
+        <label>通道组:</label>
+        <a-select
+          placeholder="请选择通道组"
+          style="width: 200px"
+          v-model="mdl1.channelgroup"
+        >
+          <a-select-option v-for="item in channelGroup" :value="item.id" :key="item.id">
+            {{ item.name }}
+          </a-select-option>
+        </a-select>
+      </p>
+      <p>
         <label>交易类型:</label>
         <a-select
           placeholder="请选择交易类型"
@@ -385,6 +410,7 @@ export default {
       mdl: {},
       visible: false,
       visible1: false,
+      channelGroup: [],
       sousuo: {
         name: ''
       },
@@ -396,7 +422,7 @@ export default {
         'limitedNumberOfDay': 1,
         'isRepeatedArrange': true,
         'isAvailable': true,
-        'channelgroup': 1,
+        'channelgroup': '请选择',
         'channelAccount': 'test' },
       loading: false,
       tablePage: {
@@ -410,6 +436,22 @@ export default {
     }
   },
   methods: {
+    selectchannelGroups () {
+      axios({
+        url: servicePath.channelGroups,
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.$store.getters.token}`
+        }
+      })
+        .then(res => {
+          if (res.status === 200) {
+            this.channelGroup = res.data
+          }
+        })
+        .catch(err => console.log(err))
+    },
     cancel (e) {
       this.$message.error('已取消')
     },
@@ -459,7 +501,7 @@ export default {
           'limitedNumberOfDay': this.mdl.limitedNumberOfDay,
           'isRepeatedArrange': this.mdl.isRepeatedArrange,
           'isAvailable': this.mdl.isAvailable,
-          'channelgroup': 1,
+          'channelgroup': this.mdl.channelgroup.id,
           'channelAccount': this.mdl.channelAccount
         }
       })
@@ -501,7 +543,7 @@ export default {
           'limitedNumberOfDay': this.mdl1.limitedNumberOfDay,
           'isRepeatedArrange': this.mdl1.isRepeatedArrange,
           'isAvailable': this.mdl1.isAvailable,
-          'channelgroup': 1,
+          'channelgroup': Number(this.mdl1.channelgroup),
           'channelAccount': this.mdl1.channelAccount
         }
       })
@@ -601,6 +643,7 @@ export default {
   },
   created () {
     this.init()
+    this.selectchannelGroups()
   },
   mounted () {
 
