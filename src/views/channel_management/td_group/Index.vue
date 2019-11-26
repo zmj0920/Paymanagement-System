@@ -85,12 +85,12 @@
         align="center"
       >
         <template v-slot="{ row }">
-          <a-switch v-model="row.isAvailable"/>
+          <a-switch v-model="row.isAvailable" @change="onChangeAvailable(row.id,row.isAvailable)"/>
         </template>
       </vxe-table-column>
       <vxe-table-column
         title="操作"
-        width="200"
+        width="280"
         fixed="right"
         align="center"
       >
@@ -251,6 +251,41 @@ export default {
     }
   },
   methods: {
+    onChangeAvailable (id, e) {
+      console.log(id, e)
+      axios({
+        url: `${servicePath.updateChannelGroups}/${id}`,
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.$store.getters.token}`
+        },
+        data: {
+          'isAvailable': e
+        }
+      })
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            this.init()
+            this.visible = false
+            setTimeout(() => {
+              this.$notification.success({
+                message: '修改成功'
+              })
+            }, 1000)
+          } else {
+            this.$notification.error({
+              message: '修改失败'
+            })
+          }
+        })
+        .catch(err => {
+          this.$notification.error({
+            message: err.message
+          })
+        })
+    },
     cancel (e) {
       this.$message.error('已取消')
     },

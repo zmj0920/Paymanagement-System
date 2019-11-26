@@ -177,11 +177,14 @@
         align="center"
       >
         <template v-slot="{ row }">
-          <a-switch v-model="row.isAvailable"/>
+          <a-switch
+            v-model="row.isAvailable"
+            @change="onChangeAvailable(row.id,row.isAvailable)"/>
         </template>
       </vxe-table-column>
       <vxe-table-column
-        field="channelAccount"
+        field="
+            channelAccount"
         width="150"
         title="渠道的账号"
         align="center"
@@ -228,7 +231,7 @@
 
         </template>
       </vxe-table-column>
-    </vxe-table>
+    </vxe-table>  </div></vxe-table></template></vxe-table-column></vxe-table></div></vxe-table></template></vxe-table>
     <vxe-pager
       perfect
       :loading="loading"
@@ -475,6 +478,40 @@ export default {
     }
   },
   methods: {
+    onChangeAvailable (id, e) {
+      axios({
+        url: `${servicePath.updateChannel}/${id}`,
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.$store.getters.token}`
+        },
+        data: {
+          'isAvailable': e
+        }
+      })
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            this.init()
+            this.visible = false
+            setTimeout(() => {
+              this.$notification.success({
+                message: '修改成功'
+              })
+            }, 1000)
+          } else {
+            this.$notification.error({
+              message: '修改失败'
+            })
+          }
+        })
+        .catch(err => {
+          this.$notification.error({
+            message: err.message
+          })
+        })
+    },
     editClosed ({ row, rowIndex, $rowIndex, column, columnIndex, $columnIndex, cell }) {
       console.log(row)
       axios({
