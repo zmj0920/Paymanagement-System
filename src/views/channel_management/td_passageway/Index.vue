@@ -440,15 +440,15 @@ export default {
         name: ''
       },
       mdl1: {
-        'name': '通道1frompost',
+        'name': '',
         'channelType': 'alipay',
         'transactionType': 'h51',
-        'limitedAcmoutOfDay': 1,
-        'limitedNumberOfDay': 1,
+        'limitedAcmoutOfDay': 1000000,
+        'limitedNumberOfDay': 1000000,
         'isRepeatedArrange': true,
         'isAvailable': true,
         'channelgroup': '请选择',
-        'channelAccount': 'test'
+        'channelAccount': ''
       },
       loading: false,
       tablePage: {

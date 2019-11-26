@@ -392,6 +392,7 @@
 <script>
 import axios from 'axios'
 import servicePath from '@/api'
+// import moment from 'moment'
 export default {
   components: {},
   data () {
@@ -425,8 +426,9 @@ export default {
   },
   methods: {
     formatterDate ({ cellValue }) {
-      var d = new Date(cellValue)
-      return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+      return ''
+      // var d = new Date(cellValue)
+      // return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
     },
     selectChannels () {
       // eslint-disable-next-line no-unused-vars

@@ -421,6 +421,7 @@
 <script>
 import axios from 'axios'
 import servicePath from '@/api'
+import moment from 'moment'
 export default {
   components: {},
   data () {
@@ -458,8 +459,8 @@ export default {
   },
   methods: {
     formatterDate ({ cellValue }) {
-      var d = new Date(cellValue)
-      return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+      // var d = new Date(cellValue)
+      return moment(cellValue).format('YYYY-MM-DD hh:mm:ss')
     },
     formatterNumberOfDay ({ cellValue }) {
       if (cellValue) {

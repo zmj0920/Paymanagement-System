@@ -25,7 +25,7 @@ const user = {
     // 登出
     Logout ({ commit }) {
       commit('SET_TOKEN', '')
-      commit('SET_ROLES', [])
+      commit('SET_INFO', [])
       Vue.ls.remove(ACCESS_TOKEN)
     }
   }

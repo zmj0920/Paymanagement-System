@@ -253,7 +253,7 @@ export default {
     },
     formatterTrue ({ cellValue }) {
       if (cellValue === true) {
-        return '是'
+        return ''
       } else {
         return '否'
       }
