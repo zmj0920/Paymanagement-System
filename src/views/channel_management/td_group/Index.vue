@@ -81,10 +81,13 @@
       <vxe-table-column
         field="isAvailable"
         width="150"
-        :formatter="formatterTrue"
         title="是否可用"
         align="center"
-      />
+      >
+        <template v-slot="{ row }">
+          <a-switch v-model="row.isAvailable"/>
+        </template>
+      </vxe-table-column>
       <vxe-table-column
         title="操作"
         width="200"
