@@ -135,10 +135,36 @@
         align="center"
       />
       <vxe-table-column
+        field="xtsw"
+        width="150"
+        title="系统商务号"
+        sortable
+        align="center"
+      />
+      <vxe-table-column
+        field="zffs"
+        width="150"
+        title="支付方式ID"
+        sortable
+        align="center"
+      />
+      <vxe-table-column
         field="merchantOrderId"
         width="320"
         title="商户订单号"
         sortable
+        align="center"
+      />
+      <vxe-table-column
+        field="pt"
+        width="180"
+        title="平台订单号"
+        align="center"
+      />
+      <vxe-table-column
+        field="sy"
+        width="180"
+        title="上游订单号"
         align="center"
       />
       <vxe-table-column
@@ -151,13 +177,24 @@
       <vxe-table-column
         field="channelType"
         width="150"
-        title="渠道类型"
+        title="渠道类型/交易类型"
         align="center"
-      />
-      <vxe-table-column
+      >
+        <template v-slot="{ row }">
+          <div>{{ row.channelType }}&nbsp;&nbsp;/&nbsp;&nbsp;{{ row.transactionType }}</div>
+        </template>
+      </vxe-table-column>
+      <!-- <vxe-table-column
         field="transactionType"
         width="150"
         title="交易类型"
+        align="center"
+      /> -->
+      <vxe-table-column
+        field="xd"
+        width="150"
+        title="下单金额(单位 分)"
+        :formatter="formatterNumberOfDay"
         align="center"
       />
       <vxe-table-column
@@ -201,18 +238,25 @@
       </vxe-table-column>
       <vxe-table-column
         field="created_at"
-        width="200"
+        width="300"
         :formatter="formatterDate"
         title="订单时间"
         align="center"
-      />
+      >
+        <template v-slot="{ row }">
+          <div>{{ row.created_at | formatterDates }}&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;{{ row.updated_at | formatterDates }}</div>
+        </template >
+      </vxe-table-column>
       <vxe-table-column
         title="操作"
-        width="200"
+        width="300"
         fixed="right"
         align="center"
       >
         <template v-slot="{ row }">
+          <vxe-button >
+            查看
+          </vxe-button>
           <vxe-button @click="verifyOrder(row)" v-show="row.status=='pay_wating'">
             验单
           </vxe-button>
@@ -243,8 +287,8 @@
           style="width: 200px"
           v-model="mdl.channelType"
         >
-          <a-select-option value="apilay">
-            apilay
+          <a-select-option value="alipay">
+            alipay
           </a-select-option>
           <a-select-option value="wechat">
             wechat
@@ -351,8 +395,8 @@
           style="width: 200px"
           v-model="mdl1.channelType"
         >
-          <a-select-option value="apilay">
-            apilay
+          <a-select-option value="alipay">
+            alipay
           </a-select-option>
           <a-select-option value="wechat">
             wechat
@@ -455,6 +499,12 @@ export default {
         pageSizes: [10, 20, 50, 100, 200, 500]
       },
       tableData: []
+    }
+  },
+  filters: {
+    formatterDates ({ cellValue }) {
+      // var d = new Date(cellValue)
+      return moment(cellValue).format('YYYY-MM-DD hh:mm:ss')
     }
   },
   methods: {

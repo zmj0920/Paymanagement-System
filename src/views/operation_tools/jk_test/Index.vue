@@ -8,7 +8,7 @@
     <p>默认下单地址： <a-input
       placeholder="异步地址"
       style="width:500px"
-      v-model="url"
+      v-model="orderNotifyUrl"
     /></p>
     <p>传递参数</p>
     <p>通道类型 <a-input type="text" style="width:400px" v-model="postData.channelType"/></p>
@@ -26,7 +26,7 @@
 
     <h4>第一步跳转支付接口url</h4>
     <br/>
-    <p>下单地址：&nbsp;{{ url }}</p>
+    <p>下单地址：&nbsp; <a-input type="text" style="width:400px" id="url" v-model="url"/> <a-button @click="copesurl()">复制</a-button></p>
     <br/>
     <h4> <p>请求方式: POST 请求头格式Content-Type: application/json </p> </h4>
     <p>参数说明</p>
@@ -37,9 +37,9 @@
     >
     </a-table>
 
-    <p>userApiKey:   <a-input type="text" style="width:400px" id="key" v-model="key"/> <a-button @click="copes()">复制密钥</a-button></p>
-    <p>urerid: <a-input type="text" style="width:400px" id="userid" v-model="userid"/> <a-button @click="copesid()">复制id</a-button></p>
-    <p>JWT: <a-textarea type="text" style="width:600px" id="jwt" v-model="token"/><a-button @click="copesjwt()">复制JWT</a-button></p>
+    <p>userApiKey:   <a-input type="text" style="width:400px" id="key" v-model="key"/> <a-button @click="copes()">复制</a-button></p>
+    <p>urerid: <a-input type="text" style="width:400px" id="userid" v-model="userid"/> <a-button @click="copesid()">复制</a-button></p>
+    <p>JWT: <a-textarea type="text" style="width:600px" id="jwt" v-model="token"/><a-button @click="copesjwt()">复制</a-button></p>
     <br/>
     <br/>
     <h3>  验签方式：</h3>
@@ -151,6 +151,7 @@ export default {
       key: '',
       token: '',
       userApiKey: '',
+      orderNotifyUrl: '',
       postData: {
         'channelType': 'alipay', // 通道类型
         'transactionType': 'pc', // 交易渠道类型
@@ -272,6 +273,23 @@ export default {
         )
       }
     },
+    copesurl () {
+      const a = document.getElementById('url')
+      a.select()
+      if (document.execCommand('Copy', 'false', null)) {
+      // 如果复制成功
+        this.$message.success(
+          '复制成功',
+          10
+        )
+      } else {
+      // 如果复制失败
+        this.$message.success(
+          '复制失败',
+          10
+        )
+      }
+    },
     copesid () {
       const a = document.getElementById('userid')
       a.select()
@@ -314,6 +332,7 @@ export default {
     this.token = this.$store.getters.token
     this.userApiKey = this.$store.getters.userInfo.apikey
     this.userid = this.$store.getters.userInfo.id
+    this.orderNotifyUrl = this.$store.getters.userInfo.orderNotifyUrl
   }
 }
 </script>

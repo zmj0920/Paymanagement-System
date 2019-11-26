@@ -214,8 +214,8 @@
           style="width: 200px"
           v-model="mdl.channelType"
         >
-          <a-select-option value="apilay">
-            apilay
+          <a-select-option value="alipay">
+            alipay
           </a-select-option>
           <a-select-option value="wechat">
             wechat
@@ -322,8 +322,8 @@
           style="width: 200px"
           v-model="mdl1.channelType"
         >
-          <a-select-option value="apilay">
-            apilay
+          <a-select-option value="alipay">
+            alipay
           </a-select-option>
           <a-select-option value="wechat">
             wechat
