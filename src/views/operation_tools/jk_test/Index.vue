@@ -1,5 +1,10 @@
 <template>
   <div>
+    <h2 style=" text-align: center;">接口文档调用说明</h2>
+    <br/>
+    <br/>
+
+    <h3>在线调试</h3>
     <p>默认下单地址： <a-input
       placeholder="异步地址"
       style="width:500px"
@@ -15,13 +20,96 @@
     <p>userApiKey: <a-input type="text" style="width:400px" v-model="userApiKey"/></p>
     <a-button @click="init()" >提交</a-button>
     </p>
+    <br/>
+    <br/>
+    <h3>调用接口说明</h3>
+
+    <h4>第一步跳转支付接口url</h4>
+    <br/>
+    <p>下单地址：&nbsp;{{ url }}</p>
+    <br/>
+    <h4> <p>请求方式: POST 请求头格式Content-Type: application/json </p> </h4>
+    <p>参数说明</p>
+
+    <a-table
+      :columns="columns"
+      :dataSource="datatable"
+    >
+    </a-table>
+
     <p>userApiKey:   <a-input type="text" style="width:400px" id="key" v-model="key"/> <a-button @click="copes()">复制密钥</a-button></p>
-    <p>urerid: <a-input type="text" style="width:400px" id="key" v-model="key"/> <a-button @click="copes()">复制id</a-button></p>
-    <p>JWT: <a-input type="text" style="width:600px" id="jwt" v-model="token"/><a-button @click="copesjwt()">复制JWT</a-button></p>
-    <p>下单地址：{{ url }}</p>
-    <p>请求方式: POST 请求Content-Type: application/json </p>
-  </div>
-</template>
+    <p>urerid: <a-input type="text" style="width:400px" id="userid" v-model="userid"/> <a-button @click="copesid()">复制id</a-button></p>
+    <p>JWT: <a-textarea type="text" style="width:600px" id="jwt" v-model="token"/><a-button @click="copesjwt()">复制JWT</a-button></p>
+    <br/>
+    <br/>
+    <h3>  验签方式：</h3>
+    <br/>
+    <br/>
+    <p>第一步：对参数按照key=value的格式排序如下： </p>
+    <div class="guide-msg mb20">
+      <p>stringA="amount=1&bankCode=cmb103&channelGroupId=1&channelType=alipay&nonce_str=qewwppmfpji&transactionType=pc&userId=1&userOrderId=34vjqeyc0sp"; </p>
+    </div>
+
+    <p class="mb10">
+      第二步：拼接API密钥：
+    </p>
+    <div class="guide-msg mb10">
+      <p>
+        stringSignTemp=stringA+"&amp;key=63ce3b400d3111eaaa5a2f4c75753a15"
+        <font
+          face="宋体"
+          color="#008000"
+        >
+          //注：key为商户平台设置的密钥key
+        </font>
+      </p>
+      <p>
+        sign=MD5(stringSignTemp).toUpperCase()="9A0A8659F005D6984697E2CA0A9CF3B7"
+        <font
+          face="宋体"
+          color="#008000"
+        >
+          //注：MD5签名方式
+        </font>
+      </p>
+
+      <p>最终得到最终发送JSON的数据：<br/><br/>
+        {<br/>
+        "channelType":"alipay",<br/>
+        "transactionType":"pc",<br/>
+        "amount":"1",<br/>
+        "channelGroupId":"1",<br/>
+        "bankCode":"cmb103",<br/>
+        "userId":1,<br/>
+        "userOrderId":"34vjqeyc0sp",<br/>
+        "nonce_str":"qewwppmfpji",<br/>
+        "sign":"1925275B657B526A49D420C8FCAEC80F"<br/>
+        }"<br/>
+      </p>
+      <p>
+      </p><p>
+        发送成功返回生成订单返回数据：<br/><br/>
+        {<br/>
+        "user": 1,<br/>
+        "channelType": "alipay",<br/>
+        "transactionType": "pc",<br/>
+        "amount": 1,<br/>
+        "fee": 0,<br/>
+        "status": "pay_wating",<br/>
+        "notifyStatus": "notbegin",<br/>
+        "channel": 46,<br/>
+        "userOrderId": "5j5g6btxtzd",<br/>
+        "merchantOrderId": "2019112513542969250237140101300",<br/>
+        "action": "https://netpay.cmbchina.com/netpayment/PC_EpccPay.do",<br/>
+        "epccGwMsg": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iV",<br/>
+        "orderId": 15,<br/>
+        "nonce_str": "3nsof53wmm",<br/>
+        "sign": "38B7372C7AB8376A7C9D258224CDB2F3"<br/>
+        }<br/>
+      </p>
+      </p>
+    </div>
+  </div></template>
 
 <script>
 import md5 from 'md5'
@@ -29,7 +117,37 @@ import axios from 'axios'
 export default {
   data () {
     return {
+      columns: [
+        {
+          title: '参数名',
+          dataIndex: 'name',
+          width: '20%'
+        },
+        {
+          title: '含义',
+          dataIndex: 'hy',
+          width: '20%'
+        },
+        {
+          title: '类型',
+          dataIndex: 'lx'
+        }, {
+          title: '说明',
+          dataIndex: 'sm'
+        }
+      ],
+      datatable: [
+        { name: 'channelType', hy: '通道类型', lx: 'string', sm: '' },
+        { name: 'transactionType', hy: '交易渠道类型', lx: 'string', sm: '' },
+        { name: 'amount', hy: '金额 (分)', lx: 'number', sm: '' },
+        { name: 'channelGroupId', hy: '通道组id', lx: 'number', sm: '' },
+        { name: 'bankCode', hy: '银行编号', lx: 'string', sm: '' },
+        { name: 'userId', hy: '用户id', lx: 'number', sm: '' },
+        { name: 'userOrderId', hy: '用户自己的订单号', lx: 'string', sm: '' },
+        { name: 'action', hy: '银行跳转的url', lx: 'string', sm: '' },
+        { name: 'epccGwMsg', hy: '向银行提交表单的参数。', lx: 'string', sm: '' }],
       url: '',
+      userid: '',
       key: '',
       token: '',
       userApiKey: '',
@@ -154,6 +272,23 @@ export default {
         )
       }
     },
+    copesid () {
+      const a = document.getElementById('userid')
+      a.select()
+      if (document.execCommand('Copy', 'false', null)) {
+      // 如果复制成功
+        this.$message.success(
+          '复制成功',
+          10
+        )
+      } else {
+      // 如果复制失败
+        this.$message.success(
+          '复制失败',
+          10
+        )
+      }
+    },
     copesjwt () {
       const a = document.getElementById('jwt')
       a.select()
@@ -178,10 +313,11 @@ export default {
     this.key = this.$store.getters.userInfo.apikey
     this.token = this.$store.getters.token
     this.userApiKey = this.$store.getters.userInfo.apikey
+    this.userid = this.$store.getters.userInfo.id
   }
 }
 </script>
 
 <style scoped>
-/* @import 'ant-design-vue/lib/style/themes/default.less'; */
+
 </style>

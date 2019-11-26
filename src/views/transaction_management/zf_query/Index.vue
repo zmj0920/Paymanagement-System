@@ -638,7 +638,7 @@ export default {
     },
     init () {
       axios({
-        url: `${servicePath.orders}?_start=${(this.tablePage.currentPage - 1) * this.tablePage.pageSize}&_limit=${this.tablePage.pageSize}&_sort=merchantOrderId`,
+        url: `${servicePath.orders}?_start=${(this.tablePage.currentPage - 1) * this.tablePage.pageSize}&_limit=${this.tablePage.pageSize}&_sort=id:DESC`,
         method: 'get',
         headers: {
           'Content-Type': 'application/json',

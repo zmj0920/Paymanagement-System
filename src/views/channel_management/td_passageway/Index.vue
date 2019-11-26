@@ -101,10 +101,11 @@
       height="400"
       row-id="id"
       :loading="loading"
-      :edit-config="{trigger: 'click', mode: 'cell'}"
+      :edit-config="{trigger: 'click', mode: 'row', showStatus: true}"
       :start-index="(tablePage.currentPage - 1) * tablePage.pageSize"
       :checkbox-config="{reserve: true}"
       :data="tableData"
+      @edit-closed="editClosed"
     >
       <vxe-table-column
         type="checkbox"
@@ -190,7 +191,6 @@
         width="150"
         title="是否在线"
         align="center"
-        :formatter="formatterBadge"
       >
         <template v-slot="{ row }">
           <a-badge status="default" text="已下线" v-show="row.isOnline==null" />
@@ -475,6 +475,42 @@ export default {
     }
   },
   methods: {
+    editClosed ({ row, rowIndex, $rowIndex, column, columnIndex, $columnIndex, cell }) {
+      console.log(row)
+      axios({
+        url: `${servicePath.updateChannel}/${row.id}`,
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.$store.getters.token}`
+        },
+        data: {
+          'limitedAcmoutOfDay': row.limitedAcmoutOfDay,
+          'limitedNumberOfDay': row.limitedNumberOfDay
+        }
+      })
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            this.init()
+            this.visible = false
+            setTimeout(() => {
+              this.$notification.success({
+                message: '修改成功'
+              })
+            }, 1000)
+          } else {
+            this.$notification.error({
+              message: '修改失败'
+            })
+          }
+        })
+        .catch(err => {
+          this.$notification.error({
+            message: err.message
+          })
+        })
+    },
     selectchannelGroups () {
       axios({
         url: servicePath.channelGroups,
