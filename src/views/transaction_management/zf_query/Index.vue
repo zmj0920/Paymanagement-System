@@ -244,7 +244,8 @@
         align="center"
       >
         <template v-slot="{ row }">
-          <div>{{ row.created_at | formatterDates }}&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;{{ row.updated_at | formatterDates }}</div>
+          <div>{{ row.created_at | formatterDates }}</div>
+          <div>{{ row.updated_at | formatterDates }}</div>
         </template >
       </vxe-table-column>
       <vxe-table-column
