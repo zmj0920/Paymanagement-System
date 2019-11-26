@@ -101,6 +101,7 @@
       height="400"
       row-id="id"
       :loading="loading"
+      :edit-config="{trigger: 'click', mode: 'cell'}"
       :start-index="(tablePage.currentPage - 1) * tablePage.pageSize"
       :checkbox-config="{reserve: true}"
       :data="tableData"
@@ -141,14 +142,26 @@
         :formatter="formatterNumberOfDay"
         title="当天限额(元/分)"
         align="center"
-      />
+        :edit-render="{name: 'input'}"
+      >
+        <template v-slot:edit="{ row }">
+          <a-input type="text" v-model="row.limitedAcmoutOfDay" >
+          </a-input>
+        </template>
+      </vxe-table-column>
       <vxe-table-column
         field="limitedNumberOfDay"
         width="150"
         title="当天限笔(元/分)"
         :formatter="formatterNumberOfDay"
         align="center"
-      />
+        :edit-render="{name: 'input'}"
+      >
+        <template v-slot:edit="{ row }">
+          <a-input type="text" v-model="row.limitedNumberOfDay">
+          </a-input>
+        </template>
+      </vxe-table-column>
       <vxe-table-column
         field="isRepeatedArrange"
         :formatter="formatterTrue"
