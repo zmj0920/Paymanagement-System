@@ -1,4 +1,3 @@
-/* eslint-disable vue/valid-v-for */
 <template>
   <div>
     <div class="table-page-search-wrapper">
@@ -183,8 +182,7 @@
         </template>
       </vxe-table-column>
       <vxe-table-column
-        field="
-            channelAccount"
+        field="channelAccount"
         width="150"
         title="渠道的账号"
         align="center"
@@ -231,7 +229,7 @@
 
         </template>
       </vxe-table-column>
-    </vxe-table>  </div></vxe-table></template></vxe-table-column></vxe-table></div></vxe-table></template></vxe-table>
+    </vxe-table>
     <vxe-pager
       perfect
       :loading="loading"

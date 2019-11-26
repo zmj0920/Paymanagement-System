@@ -134,7 +134,7 @@
         sortable
         align="center"
       />
-      <vxe-table-column
+      <!-- <vxe-table-column
         field="xtsw"
         width="150"
         title="系统商务号"
@@ -147,15 +147,20 @@
         title="支付方式ID"
         sortable
         align="center"
-      />
+      /> -->
       <vxe-table-column
         field="merchantOrderId"
         width="320"
         title="商户订单号"
         sortable
         align="center"
-      />
-      <vxe-table-column
+      >
+        <template v-slot="{ row }">
+          <div>{{ row.merchantOrderId }}</div>
+          <div>{{ row.userOrderId }}</div>
+        </template>
+      </vxe-table-column>
+      <!-- <vxe-table-column
         field="pt"
         width="180"
         title="平台订单号"
@@ -166,7 +171,7 @@
         width="180"
         title="上游订单号"
         align="center"
-      />
+      /> -->
       <vxe-table-column
         field="user.username"
         width="150"
@@ -190,13 +195,13 @@
         title="交易类型"
         align="center"
       /> -->
-      <vxe-table-column
+      <!-- <vxe-table-column
         field="xd"
         width="150"
         title="下单金额(单位 分)"
         :formatter="formatterNumberOfDay"
         align="center"
-      />
+      /> -->
       <vxe-table-column
         field="amount"
         width="150"
