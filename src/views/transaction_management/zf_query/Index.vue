@@ -127,7 +127,6 @@
       height="400"
       row-id="id"
       :loading="loading"
-      :footer-method="footerMethod"
       :footer-cell-class-name="footerCellClassName"
       :start-index="(tablePage.currentPage - 1) * tablePage.pageSize"
       :checkbox-config="{reserve: true}"
