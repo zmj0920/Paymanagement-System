@@ -205,14 +205,14 @@
       <vxe-table-column
         field="amount"
         width="150"
-        title="交易金额(单位 分)"
+        title="交易金额/元"
         :formatter="formatterNumberOfDay"
         align="center"
       />
       <vxe-table-column
         field="fee"
         width="150"
-        title="交易手续费"
+        title="交易手续费/元"
         :formatter="formatterNumberOfDay"
         align="center"
       />
@@ -251,7 +251,7 @@
         <template v-slot="{ row }">
           <div>{{ row.created_at | formatterDates }}</div>
           <div>{{ row.updated_at | formatterDates }}</div>
-        </template >
+        </template>
       </vxe-table-column>
       <vxe-table-column
         title="操作"
@@ -320,8 +320,8 @@
         </a-select>
       </p>
       <p>
-        <label>交易金额(单位 分):</label> <a-input
-          placeholder="交易金额(单位 分)"
+        <label>交易金额/元:</label> <a-input
+          placeholder="交易金额/元"
           v-model="mdl.amount"
           style="width: 200px"
         />
@@ -428,15 +428,15 @@
         </a-select>
       </p>
       <p>
-        <label>当天限额:</label><a-input
-          placeholder="当天限额"
+        <label>当天限额/元:</label><a-input
+          placeholder="当天限额/元"
           style="width: 200px"
           v-model="mdl1.limitedAcmoutOfDay"
         />
       </p>
       <p>
-        <label>当天限笔:</label><a-input
-          placeholder="当天限笔"
+        <label>当天限笔/元:</label><a-input
+          placeholder="当天限笔/元"
           style="width: 200px"
           v-model="mdl1.limitedNumberOfDay"
         />

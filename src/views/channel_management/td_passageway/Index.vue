@@ -140,7 +140,7 @@
         field="limitedAcmoutOfDay"
         width="150"
         :formatter="formatterNumberOfDay"
-        title="当天限额(元/分)"
+        title="当天限额/元"
         align="center"
         :edit-render="{name: 'input'}"
       >
@@ -152,7 +152,7 @@
       <vxe-table-column
         field="limitedNumberOfDay"
         width="150"
-        title="当天限笔(元/分)"
+        title="当天限笔/元"
         :formatter="formatterNumberOfDay"
         align="center"
         :edit-render="{name: 'input'}"
@@ -298,15 +298,15 @@
         </a-select>
       </p>
       <p>
-        <label>当天限额:</label><a-input
-          placeholder="当天限额"
+        <label>当天限额/元:</label><a-input
+          placeholder="当天限额/元"
           style="width: 200px"
           v-model="mdl.limitedAcmoutOfDay"
         />
       </p>
       <p>
-        <label>当天限笔:</label><a-input
-          placeholder="当天限笔"
+        <label>当天限笔/元:</label><a-input
+          placeholder="当天限笔/元"
           style="width: 200px"
           v-model="mdl.limitedNumberOfDay"
         />
@@ -397,15 +397,15 @@
         </a-select>
       </p>
       <p>
-        <label>当天限额:</label><a-input
-          placeholder="当天限额"
+        <label>当天限额/元:</label><a-input
+          placeholder="当天限额/元"
           style="width: 200px"
           v-model="mdl1.limitedAcmoutOfDay"
         />
       </p>
       <p>
-        <label>当天限笔:</label><a-input
-          placeholder="当天限笔"
+        <label>当天限笔/元:</label><a-input
+          placeholder="当天限笔/元"
           style="width: 200px"
           v-model="mdl1.limitedNumberOfDay"
         />
