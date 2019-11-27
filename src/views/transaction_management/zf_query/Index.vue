@@ -235,10 +235,22 @@
         align="center"
       >
         <template v-slot="{ row }">
-          <a-badge status="warning" text="支付中" v-show="row.notifyStatus=='pay_wating'" />
-          <a-badge status="success" text="支付成功" v-show="row.notifyStatus=='pay_success'" />
-          <a-badge status="default" text="未开始" v-show="row.notifyStatus=='notbegin'" />
-          <a-badge status="error" text="支付失败" v-show="row.notifyStatus=='fail'" />
+          <a-badge status="warning" text="推送中" v-show="row.notifyStatus=='pay_wating'" />
+          <a-badge status="success" text="推送成功" v-show="row.notifyStatus=='pay_success'" />
+          <a-badge status="default" text="未推送" v-show="row.notifyStatus=='notbegin'" />
+          <a-badge status="error" text="推送失败" v-show="row.notifyStatus=='fail'" />
+        </template>
+      </vxe-table-column>
+
+      <vxe-table-column
+        field="td"
+        width="320"
+        title="通道"
+        align="center"
+      >
+        <template v-slot="{ row }">
+          <div>{{ row.channel.name }}</div>
+          <div>{{ row.channel.channelAccount }}</div>
         </template>
       </vxe-table-column>
       <vxe-table-column
@@ -260,9 +272,9 @@
         align="center"
       >
         <template v-slot="{ row }">
-          <vxe-button >
+          <!-- <vxe-button >
             查看
-          </vxe-button>
+          </vxe-button> -->
           <vxe-button @click="verifyOrder(row)" v-show="row.status=='pay_wating'">
             验单
           </vxe-button>

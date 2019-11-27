@@ -3,22 +3,53 @@
     <h2 style=" text-align: center;">接口文档调用说明</h2>
     <br/>
     <br/>
-
     <h3>在线调试</h3>
-    <p>默认下单地址： <a-input
-      placeholder="异步地址"
-      style="width:500px"
-      v-model="orderNotifyUrl"
-    /></p>
-    <p>传递参数</p>
-    <p>通道类型 <a-input type="text" style="width:400px" v-model="postData.channelType"/></p>
-    <p> 交易渠道类型:  <a-input type="text" style="width:400px" v-model="postData.transactionType"/></p>
-    <p> 金额(分)<a-input type="text" style="width:400px" v-model="postData.amount"/></p>
-    <p>通道组id： <a-input type="text" style="width:400px" v-model="postData.channelGroupId"/></p>
-    <p>银行编号： <a-input type="text" style="width:400px" v-model="postData.bankCode"/></p>
-    <p>用户id： <a-input type="text" style="width:400px" v-model="postData.userId"/></p>
-    <p>userApiKey: <a-input type="text" style="width:400px" v-model="userApiKey"/></p>
-    <a-button @click="init()" >提交</a-button>
+    <table>
+      <tr>
+        <td>默认下单地址：</td>
+        <td> <a-input
+          placeholder="异步地址"
+          style="width:400px"
+          v-model="orderNotifyUrl"
+        /></td>
+      </tr>
+      <tr>
+        <td><h3>传递参数</h3></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>通道类型:</td>
+        <td><a-input type="text" style="width:400px" v-model="postData.channelType"/></td>
+      </tr>
+      <tr>
+        <td>交易渠道类型:</td>
+        <td><a-input type="text" style="width:400px" v-model="postData.transactionType"/></td>
+      </tr>
+      <tr>
+        <td>金额(分):</td>
+        <td><a-input type="text" style="width:400px" v-model="postData.amount"/></td>
+      </tr>
+      <tr>
+        <td>通道组id：</td>
+        <td><a-input type="text" style="width:400px" v-model="postData.channelGroupId"/></td>
+      </tr>
+      <tr>
+        <td>银行编号：</td>
+        <td><a-input type="text" style="width:400px" v-model="postData.bankCode"/></td>
+      </tr>
+      <tr>
+        <td>用户id：</td>
+        <td> <a-input type="text" style="width:400px" v-model="postData.userId"/></td>
+      </tr>
+      <tr>
+        <td>userApiKey:</td>
+        <td><a-input type="text" style="width:400px" v-model="userApiKey"/></td>
+      </tr>
+      <tr>
+        <td> </td>
+        <td><a-button @click="init()" >提交</a-button></td>
+      </tr>
+    </table>
     </p>
     <br/>
     <br/>
@@ -36,10 +67,32 @@
       :dataSource="datatable"
     >
     </a-table>
-
-    <p>userApiKey:   <a-input type="text" style="width:400px" id="key" v-model="key"/> <a-button @click="copes()">复制</a-button></p>
-    <p>urerid: <a-input type="text" style="width:400px" id="userid" v-model="userid"/> <a-button @click="copesid()">复制</a-button></p>
-    <p>JWT: <a-textarea type="text" style="width:600px" id="jwt" v-model="token"/><a-button @click="copesjwt()">复制</a-button></p>
+    <table>
+      <tr>
+        <td>异步地址：</td>
+        <td> <a-input
+          placeholder="异步地址"
+          style="width:400px"
+          v-model="orderNotifyUrl"
+          id="orderNotifyUrl"
+        /> <a-button @click="copesorderNotifyUrl()">复制</a-button></td>
+      </tr>
+      <tr>
+        <td>userApiKey:</td>
+        <td><a-input type="text" style="width:400px" id="key" v-model="key"/> <a-button @click="copes()">复制</a-button></td>
+      </tr>
+      <tr>
+        <td>urerid:</td>
+        <td><a-input type="text" style="width:400px" id="userid" v-model="userid"/> <a-button @click="copesid()">复制</a-button></td>
+      </tr>
+      <tr>
+        <td>JWT:</td>
+        <td><a-textarea type="text" style="width:400px" id="jwt" v-model="token"/> <a-button @click="copesjwt()">复制</a-button></td>
+      </tr>
+    </table>
+    <!-- <p>userApiKey: <a-input type="text" style="width:400px" id="key" v-model="key"/> <a-button @click="copes()">复制</a-button></p> -->
+    <!-- <p>urerid: <a-input type="text" style="width:400px" id="userid" v-model="userid"/> <a-button @click="copesid()">复制</a-button></p> -->
+    <!-- <p>JWT: <a-textarea type="text" style="width:400px" id="jwt" v-model="token"/><a-button @click="copesjwt()">复制</a-button></p> -->
     <br/>
     <br/>
     <h3>  验签方式：</h3>
@@ -275,6 +328,23 @@ export default {
     },
     copesurl () {
       const a = document.getElementById('url')
+      a.select()
+      if (document.execCommand('Copy', 'false', null)) {
+      // 如果复制成功
+        this.$message.success(
+          '复制成功',
+          10
+        )
+      } else {
+      // 如果复制失败
+        this.$message.success(
+          '复制失败',
+          10
+        )
+      }
+    },
+    copesorderNotifyUrl () {
+      const a = document.getElementById('orderNotifyUrl')
       a.select()
       if (document.execCommand('Copy', 'false', null)) {
       // 如果复制成功
