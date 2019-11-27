@@ -18,10 +18,22 @@
             :md="7"
             :sm="24"
           >
+            <a-form-item label="订单号">
+              <a-input
+                placeholder="订单号"
+                v-model="sousuo.merchantOrderId"
+              />
+            </a-form-item>
+          </a-col>
+
+          <a-col
+            :md="7"
+            :sm="24"
+          >
             <a-form-item label="商户订单号">
               <a-input
                 placeholder="商户订单号"
-                v-model="sousuo.merchantOrderId"
+                v-model="sousuo.userOrderId"
               />
             </a-form-item>
           </a-col>
@@ -531,7 +543,8 @@ export default {
         merchantOrderId: '',
         orderstatus: '',
         channelType: '',
-        transactionType: ''
+        transactionType: '',
+        userOrderId: ''
       },
       mdl1: {
         'name': '通道1frompost',
@@ -610,6 +623,8 @@ export default {
         urls += `&channelType=${this.sousuo.channelType}`
       } else if (this.sousuo.transactionType !== '') {
         urls += `&transactionType=${this.sousuo.transactionType}`
+      } else if (this.sousuo.userOrderId !== '') {
+        urls += `&userOrderId=${this.sousuo.userOrderId}`
       }
       axios({
         url: urls,
