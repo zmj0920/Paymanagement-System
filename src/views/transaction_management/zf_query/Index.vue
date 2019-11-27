@@ -111,20 +111,31 @@
         <vxe-button @click="handleEdit">编辑</vxe-button>
       </template> -->
     </vxe-toolbar>
+    <a-row style="height: 50px;">
+      <a-col :span="4">下单金额【{{ amountsum/100 }}元/{{ array.length }}笔】</a-col>
+      <a-col :span="4">成交金额【{{ amountsum/100 }}元/{{ array.length }}笔】</a-col>
+      <a-col :span="4">成功率【{{ successrate }}%】</a-col>
+      <a-col :span="4">系统盈利【{{ amountsuccesssum/100 }}元】</a-col>
+      <a-col :span="4">待支付【{{ paywatingsum/100 }}元/{{ paywating.length }}笔】</a-col>
+      <a-col :span="4">支付失败【{{ payfailsum/100 }}元/{{ payfail.length }}笔】</a-col>
+    </a-row>
     <vxe-table
       border
       show-overflow
+      show-footer
       ref="xTable"
       height="400"
       row-id="id"
       :loading="loading"
+      :footer-method="footerMethod"
+      :footer-cell-class-name="footerCellClassName"
       :start-index="(tablePage.currentPage - 1) * tablePage.pageSize"
       :checkbox-config="{reserve: true}"
       :data="tableData"
     >
       <vxe-table-column
         type="checkbox"
-        width="40"
+        width="150"
         align="center"
       />
       <vxe-table-column
@@ -491,6 +502,31 @@ export default {
       mdl: {},
       visible: false,
       visible1: false,
+      amountsum: 0,
+      payfailsum: 0,
+      successrate: 0,
+      paywatingsum: 0,
+      amountsuccesssum: 0,
+      feesum: 0,
+      array: [],
+      status: {
+        createwating: [],
+        // 等待支付
+        paywating: [],
+        // 支付成功
+        paysuccess: [],
+        // 支付失败
+        payfail: [],
+        // 创建失败
+        createfail: []
+      },
+      notifyStatus: {
+        // 推送状态eslint-disable-next-line no-unused-vars
+        notbegin: [],
+        waiting: [], // 等待确认
+        success: [], // 推送成功
+        fail: [] //   推送失败
+      },
       sousuo: {
         id: '',
         merchantOrderId: '',
@@ -526,6 +562,31 @@ export default {
     }
   },
   methods: {
+    footerCellClassName ({ $rowIndex, column, columnIndex }) {
+      if (columnIndex === 0) {
+        if ($rowIndex === 0) {
+          return 'col-blue'
+        } else {
+          return 'col-red'
+        }
+      }
+    },
+    footerMethod ({ columns, data }) {
+      return [
+        columns.map((column, columnIndex) => {
+          if (columnIndex === 0) {
+            return '查询'
+          }
+          if (['amount'].includes(column.property)) {
+            return `总金额${this.$utils.sum(data, column.property)}/元`
+          }
+          if (['fee'].includes(column.property)) {
+            return `手续费总金额${this.$utils.sum(data, column.property)}/元`
+          }
+          return null
+        })
+      ]
+    },
     formatterDate ({ cellValue }) {
       // var d = new Date(cellValue)
       return moment(cellValue).format('YYYY-MM-DD hh:mm:ss')
@@ -562,6 +623,7 @@ export default {
         .then(res => {
           if (res.status === 200) {
             this.tableData = res.data
+            this.datainit(this.tableData)
           }
         })
         .catch(err => console.log(err))
@@ -716,6 +778,7 @@ export default {
         .then(res => {
           if (res.status === 200) {
             this.tableData = res.data
+            this.datainit(this.tableData)
           }
         })
         .catch(err => console.log(err))
@@ -729,12 +792,111 @@ export default {
         }
       })
         .then(res => {
-          console.log(res)
           if (res.status === 200) {
             this.tablePage.total = res.data
           }
         })
         .catch(err => console.log(err))
+    },
+    datainit (data) {
+      // status:
+      // create_wating 创建中
+      // pay_wating 等待支付
+      // pay_success支付成功
+      // pay_fail       支付失败
+      // create_fail   创建失败
+
+      // notifyStatus:
+      // notbegin  未推送
+      // waiting     等待确认
+      // success    推送成功
+      // fail           推送失败
+
+      // console.log(data)
+      const array = data
+      // 金额
+      // eslint-disable-next-line no-unused-vars
+      var amountsum = 0
+      // eslint-disable-next-line no-unused-vars
+      var payfailsum = 0
+      // eslint-disable-next-line no-unused-vars
+      var feesum = 0
+      // 订单状态创建中eslint-disable-next-line no-unused-vars
+      var createwating = []
+      // 等待支付
+      var paywating = []
+      // 支付成功
+      var paysuccess = []
+      // 支付失败
+      var payfail = []
+      // 创建失败
+      var createfail = []
+      // 推送状态eslint-disable-next-line no-unused-vars
+      var notbegin = []
+
+      var waiting = [] // 等待确认
+      var success = [] // 推送成功
+      var fail = [] //   推送失败
+      // eslint-disable-next-line no-unused-vars
+      var paywatingsum = 0
+      // eslint-disable-next-line no-unused-vars
+      var amountsuccesssum = 0
+      for (let index = 0; index < array.length; index++) {
+        amountsum += array[index].amount
+        feesum += array[index].fee
+        // 订单状态
+        if (array[index].status === 'create_wating') {
+          createwating.push(array[index].status)
+        } else if (array[index].status === 'pay_wating') {
+          paywatingsum += array[index].amount
+          paywating.push(array[index].status)
+        } else if (array[index].status === 'pay_success') {
+          amountsuccesssum += array[index].amount
+          paysuccess.push(array[index].status)
+        } else if (array[index].status === 'pay_fail') {
+          payfailsum += array[index].amount
+          payfail.push(array[index].status)
+        } else if (array[index].status === 'pay_fail') {
+          createfail.push(array[index].status)
+        }
+        // 推送状态
+        if (array[index].notifyStatus === 'notbegin') {
+          notbegin.push(array[index].notifyStatus)
+        } else if (array[index].notifyStatus === 'waiting') {
+          waiting.push(array[index].notifyStatus)
+        } else if (array[index].notifyStatus === 'success') {
+          success.push(array[index].notifyStatus)
+        } else if (array[index].notifyStatus === 'fail') {
+          fail.push(array[index].notifyStatus)
+        }
+      }
+      this.array = array
+      this.amountsum = amountsum
+      // eslint-disable-next-line no-unused-vars
+      this.feesum = feesum
+      // 订单状态创建中eslint-disable-next-line no-unused-vars
+      this.createwating = createwating
+      // 等待支付
+      this.paywating = paywating
+      // 支付成功
+      this.paysuccess = paysuccess
+      // 支付失败
+      this.payfail = payfail
+      // 创建失败
+      this.createfail = createfail
+      // 推送状态eslint-disable-next-line no-unused-vars
+      this.notbegin = notbegin
+      this.payfailsum = payfailsum
+      this.waiting = waiting // 等待确认
+      this.success = success // 推送成功
+      this.fail = fail //   推送失败
+      console.log(array.length)
+      this.successrate = (Number(paysuccess.length) / Number(array.length) * 100)
+      this.paywatingsum = paywatingsum
+      this.amountsuccesssum = amountsuccesssum
+      console.log(this.amountsum)
+      console.log(this.feesum)
+      console.log(this.createwating)
     }
   },
   created () {
@@ -743,6 +905,7 @@ export default {
   mounted () {
 
   }
+
 }
 </script>
 <style lang="less">

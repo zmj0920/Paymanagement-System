@@ -10877,6 +10877,11 @@ vxe-table@^2.6.22:
   resolved "https://registry.npm.taobao.org/vxe-table/download/vxe-table-2.6.22.tgz#5c82f8094b0b3d46475197cbf24001ae6cec0cfd"
   integrity sha1-XIL4CUsLPUZHUZfL8kABrmzsDP0=
 
+vxe-utils@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.npm.taobao.org/vxe-utils/download/vxe-utils-1.7.2.tgz#7b00119d8f4bf031bd89d66a043961614f30ffc4"
+  integrity sha1-ewARnY9L8DG9idZqBDlhYU8w/8Q=
+
 w3c-hr-time@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/w3c-hr-time/download/w3c-hr-time-1.0.1.tgz#82ac2bff63d950ea9e3189a58a65625fedf19045"

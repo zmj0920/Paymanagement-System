@@ -69,9 +69,9 @@
     </a-table>
     <table>
       <tr>
-        <td>异步地址：</td>
+        <td>异步回调地址</td>
         <td> <a-input
-          placeholder="异步地址"
+          placeholder="异步回调地址"
           style="width:400px"
           v-model="orderNotifyUrl"
           id="orderNotifyUrl"
